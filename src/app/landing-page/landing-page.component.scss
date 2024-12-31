@@ -188,22 +188,27 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.3);
+  margin: 0px;
 
   .pre-title {
-    font-size: 4rem;
-    font-weight: 600;
-    background: linear-gradient(to right, #065f46, #22c55e); 
-    border-radius: 10px;
-    padding: 0px 20px 0px 20px;
+    font-size: 3rem;
+    font-weight: 400;
+    // background: linear-gradient(to right, #065f46, #22c55e); 
+    // border-radius: 10px;
+    // padding: 0px 20px 0px 20px;
     box-decoration-break: slice;
+    margin: 0px;
+    line-height: 1;
   }
 
   .title {
     font-size: 6rem;
     font-weight: 700;
-    background: linear-gradient(to right, #22c55e, #065f46);
-    border-radius: 10px;
-    padding: 0px 20px 0px 20px;
+    // background: linear-gradient(to right, #22c55e, #065f46);
+    // border-radius: 10px;
+    // padding: 0px 20px 0px 20px;
     box-decoration-break: slice;
+    margin: 0px;
+    line-height: 1;
   }
 }
