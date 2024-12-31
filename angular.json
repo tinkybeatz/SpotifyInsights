@@ -27,7 +27,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "src/app/landing-page/landing-page.component.scss" 
             ],
             "scripts": []
           },
@@ -85,7 +86,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "src/app/landing-page/landing-page.component.scss" 
             ],
             "scripts": []
           }
