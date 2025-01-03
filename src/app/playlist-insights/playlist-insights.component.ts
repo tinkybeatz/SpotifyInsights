@@ -1,45 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'app-playlist-insights',
-  standalone: true,
   templateUrl: './playlist-insights.component.html',
 })
-export class PlaylistInsightsComponent {
-  constructor() {}
+export class PlaylistInsightsComponent implements OnInit {
+  playlistId: string | null = null;
+  playlistInfo: string = '';
 
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute) {}
 
-  submit() {
-    // https://open.spotify.com/playlist/3aI8mappd9DyYvgIkDWy7y?si=c6d807c5eed64387
-    const formInputUrl = (document.getElementById('input') as HTMLInputElement)
-      .value;
-    const playlist_id = formInputUrl.split('playlist/')[1].split('?')[0];
-    console.log(playlist_id);
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.playlistId = params.get('playlist_id'); // Assign the parameter to the class property
+      console.log("Here is the given ID:", this.playlistId);
+
+      if (this.playlistId) {
+        this.getPlaylistInfo(this.playlistId); // Call the Axios function
+      }
+    });
+  }
+
+  // Use axios to fetch data from the API
+  async getPlaylistInfo(playlistId: string): Promise<void> {
+    try {
+      const response = await axios.get(`https://spotify-insights-api.vercel.app/playlist_info/${playlistId}`);
+      console.log("Playlist info:", response.data);
+      this.playlistInfo = JSON.stringify(response.data); // Store the response in a string format
+    } catch (error) {
+      console.error("Error fetching playlist info:", error);
+    }
   }
 }
-
-// import { Component } from '@angular/core';
-// import { HttpClient, HttpClientModule } from '@angular/common/http';
-
-// @Component({
-//   selector: 'app-playlist-insights',
-//   standalone: true,
-//   templateUrl: './playlist-insights.component.html',
-//   imports: [HttpClientModule], // Import HttpClientModule here
-// })
-// export class PlaylistInsightsComponent {
-//   constructor(private http: HttpClient) {}
-
-//   submit() {
-//     const formInputUrl = (document.getElementById('input') as HTMLInputElement)
-//       .value;
-//     const playlist_id = formInputUrl.split('playlist/')[1].split('?')[0];
-//     console.log(playlist_id);
-//     this.http
-//       .get<any>(`https://api.spotify.com/v1/playlists/${playlist_id}`)
-//       .subscribe((data: any) => {
-//         console.log(data);
-//       });
-//   }
-// }
