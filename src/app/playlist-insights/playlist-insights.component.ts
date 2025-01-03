@@ -21,7 +21,9 @@ export class PlaylistInsightsComponent implements OnInit {
     externalUrl: string;
     owner: string;
     actualTracksCount: number;
-    tracks: { trackName: string; artists: string[] }[];
+    tracks: { trackName: string; artists: string[]; album: string; link: string }[];
+    albums: { albumName: string; artists: string[]; nbSongsInPlaylist: number }[];
+    artists: { artistName: string; nbSongsInPlaylist: number }[];
   } | undefined;
 
   constructor(private route: ActivatedRoute) {}

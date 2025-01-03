@@ -9,6 +9,13 @@
 
     <div *ngIf="playlistDataFiltered">
       <h3>Playlist Information:</h3>
+      <div>
+        <!-- <img
+          class="w-32 h-32 rounded-full"
+          [src]="playlistDataFiltered.imageUrl"
+          alt="Playlist Image"
+        /> -->
+      </div>
       <p>Name: {{ playlistDataFiltered.name }}</p>
       <p>Track Count: {{ playlistDataFiltered.trackCount }}</p>
       <p>Description: {{ playlistDataFiltered.description }}</p>
@@ -17,19 +24,55 @@
       <p>Owner: {{ playlistDataFiltered.owner }}</p>
       <p>
         External URL:
-        <a class="text-red-600" href="{{ playlistDataFiltered.externalUrl }}" target="_blank"
+        <a
+          class="text-red-600"
+          href="{{ playlistDataFiltered.externalUrl }}"
+          target="_blank"
           >Open Playlist</a
         >
       </p>
 
-      <h4>Tracks:</h4>
+      <h4>All Tracks:</h4>
+      <h4>All Tracks:</h4>
       <ul>
-        <li *ngFor="let track of playlistDataFiltered.tracks">
+        <li
+          *ngFor="let track of playlistDataFiltered.tracks"
+          class="bg-gray-800 p-2 m-1 rounded-md"
+          [ngClass]="{ 'text-red-600': track.trackName === 'Unknown Track' }"
+        >
           <strong>{{ track.trackName }}</strong> by {{ track.artists }}
+          <strong>|</strong> {{ track.album }} <strong>|</strong>
+          {{ track.link }}
         </li>
       </ul>
 
       <p>Number of tracks here: {{ playlistDataFiltered.actualTracksCount }}</p>
+
+      <h4>Albums:</h4>
+      <ul>
+        <li
+          *ngFor="let album of playlistDataFiltered.albums"
+          class="bg-gray-800 p-2 m-1 rounded-md"
+          [ngClass]="{ 'text-red-600': album.albumName === 'Unknown Album' }"
+        >
+          <strong>{{ album.albumName }}</strong> by {{ album.artists }}
+          <strong>|</strong> this playlist has :
+          {{ album.nbSongsInPlaylist }} songs of this album
+        </li>
+      </ul>
+
+      <h4>Artist:</h4>
+      <ul>
+        <li
+          *ngFor="let artist of playlistDataFiltered.artists"
+          class="bg-gray-800 p-2 m-1 rounded-md"
+          [ngClass]="{ 'text-red-600': artist.artistName === 'Unknown Artist' }"
+        >
+          <strong>{{ artist.artistName }}</strong>
+          <strong> |</strong> this playlist has :
+          {{ artist.nbSongsInPlaylist }} songs of this artist
+        </li>
+      </ul>
     </div>
 
     <div *ngIf="!playlistDataFiltered">
