@@ -1,3 +1,17 @@
-<main class="bg-gray-950 font-sans flex min-h-screen">
-    <div class="text-green-600 m-2">here is the ID of your playlist : <p id="playlist_id"></p></div>
+<main class="bg-gray-950 font-sans flex flex-col min-h-screen">
+  <div class="text-green-600 m-2">
+    here is the ID of your playlist :
+    <p id="playlist_id"></p>
+  </div>
+
+  <div class="text-green-600 m-2">
+    <div *ngIf="playlistInfo">
+      <h3>Playlist Information:</h3>
+      <p>{{ playlistInfo }}</p>
+    </div>
+  
+    <div *ngIf="!playlistInfo">
+      <p>Loading...</p>
+    </div>
+  </div>
 </main>

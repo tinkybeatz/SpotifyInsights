@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
+import { CommonModule } from '@angular/common'; // Import CommonModule
 
 @Component({
   selector: 'app-playlist-insights',
+  standalone: true,
   templateUrl: './playlist-insights.component.html',
+  imports: [CommonModule] // Add the CommonModule to the imports array
 })
 export class PlaylistInsightsComponent implements OnInit {
   playlistId: string | null = null;
