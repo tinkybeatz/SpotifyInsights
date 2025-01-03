@@ -5,12 +5,34 @@
   </div>
 
   <div class="text-green-600 mx-2 mb-2">
-    <div *ngIf="playlistInfo">
+    <!-- playlist-insights.component.html -->
+
+    <div *ngIf="playlistDataFiltered">
       <h3>Playlist Information:</h3>
-      <p>{{ playlistInfo }}</p>
+      <p>Name: {{ playlistDataFiltered.name }}</p>
+      <p>Track Count: {{ playlistDataFiltered.trackCount }}</p>
+      <p>Description: {{ playlistDataFiltered.description }}</p>
+      <p>Followers: {{ playlistDataFiltered.followers }}</p>
+      <p>Collaborative: {{ playlistDataFiltered.collaborative }}</p>
+      <p>Owner: {{ playlistDataFiltered.owner }}</p>
+      <p>
+        External URL:
+        <a class="text-red-600" href="{{ playlistDataFiltered.externalUrl }}" target="_blank"
+          >Open Playlist</a
+        >
+      </p>
+
+      <h4>Tracks:</h4>
+      <ul>
+        <li *ngFor="let track of playlistDataFiltered.tracks">
+          <strong>{{ track.trackName }}</strong> by {{ track.artists }}
+        </li>
+      </ul>
+
+      <p>Number of tracks here: {{ playlistDataFiltered.actualTracksCount }}</p>
     </div>
-  
-    <div *ngIf="!playlistInfo">
+
+    <div *ngIf="!playlistDataFiltered">
       <p>Loading...</p>
     </div>
   </div>
