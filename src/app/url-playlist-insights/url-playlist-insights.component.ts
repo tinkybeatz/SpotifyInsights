@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-playlist-insights',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './url-playlist-insights.component.html',
 })
 export class UrlPlaylistInsightsComponent {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -29,12 +30,12 @@ export class UrlPlaylistInsightsComponent {
           'Invalid URL. Please enter a valid Spotify playlist URL.'
         );
       } else {
-        console.log(playlist_id);
-        const playlistElement = document.getElementById('playlist_id');
-        if (playlistElement) {
-          playlistElement.innerText = playlist_id;
-        }
+        this.navigateToPlaylistInsights(playlist_id);
       }
     }
+  }
+
+  navigateToPlaylistInsights(playlist_id: string) {
+    this.router.navigate(['/playlistInsights', playlist_id]);
   }
 }

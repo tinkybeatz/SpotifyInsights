@@ -1,10 +1,10 @@
 <main class="bg-gray-950 font-sans flex flex-col min-h-screen">
-  <div class="text-green-600 m-2">
-    here is the ID of your playlist :
+  <div class="text-green-600 font-semibold text-2xl m-5">
+    Here is your playlist data
     <p id="playlist_id"></p>
   </div>
 
-  <div class="text-green-600 m-2">
+  <div class="text-green-600 mx-2 mb-2">
     <div *ngIf="playlistInfo">
       <h3>Playlist Information:</h3>
       <p>{{ playlistInfo }}</p>
