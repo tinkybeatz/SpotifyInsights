@@ -1,3 +1,14 @@
+<style>
+  .tab {
+    display: flex;
+    background-color: rgb(75 85 99);
+    margin: 4px;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
 <main class="bg-gray-950 font-sans flex flex-col min-h-screen">
   <div class="text-green-600 font-semibold text-2xl m-5">
     Here is your playlist data
@@ -9,19 +20,14 @@
 
     <div *ngIf="playlistDataFiltered">
       <h3>Playlist Information:</h3>
-      <div>
-        <!-- <img
-          class="w-32 h-32 rounded-full"
-          [src]="playlistDataFiltered.imageUrl"
-          alt="Playlist Image"
-        /> -->
+      <div class="grid grid-cols-6 bg-gray-700 justify-center p-1 m-1 rounded-lg h-[100px]">
+        <p class="tab">Name: {{ playlistDataFiltered.name }}</p>
+        <p class="tab">Track Count: {{ playlistDataFiltered.trackCount }}</p>
+        <p class="tab">Description: {{ playlistDataFiltered.description }}</p>
+        <p class="tab">Followers: {{ playlistDataFiltered.followers }}</p>
+        <p class="tab">Collaborative: {{ playlistDataFiltered.collaborative }}</p>
+        <p class="tab">Owner: {{ playlistDataFiltered.owner }}</p>
       </div>
-      <p>Name: {{ playlistDataFiltered.name }}</p>
-      <p>Track Count: {{ playlistDataFiltered.trackCount }}</p>
-      <p>Description: {{ playlistDataFiltered.description }}</p>
-      <p>Followers: {{ playlistDataFiltered.followers }}</p>
-      <p>Collaborative: {{ playlistDataFiltered.collaborative }}</p>
-      <p>Owner: {{ playlistDataFiltered.owner }}</p>
       <p>
         External URL:
         <a
