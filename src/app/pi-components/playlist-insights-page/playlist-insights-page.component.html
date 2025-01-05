@@ -1,17 +1,23 @@
 <style>
-    .small-title {
+  .small-title {
     font-size: 2rem;
     font-weight: 500;
     margin: 20px 0px 20px 0px;
-    text-align: center;
     box-decoration-break: slice;
     line-height: 1;
     color: white;
   }
 </style>
 
-<div class="flex flex-col bg-black h-[100vh]">
-  <div class="small-title">Spotify Playlist Insights</div>
+<div class="flex flex-col bg-neutral-900 h-[100vh]">
+  <div class="grid grid-cols-3 gap-4 mx-10">
+    <div class="col-span-1 small-title text-end">Spotify Playlist Insights</div>
+    <div class="flex col-span-2 items-center">
+      <app-url-playlist-insights
+        (playlistSelected)="onPlaylistSelected($event)"
+      ></app-url-playlist-insights>
+    </div>
+  </div>
   <app-navbar></app-navbar>
   <div class="flex mb-4 mx-4 overflow-auto h-[100vh] shadow-inner">
     <div class="gradient-bg">
@@ -23,12 +29,18 @@
         <div class="g5"></div>
       </div>
       <div
+        *ngIf="playlistId"
         class="flex w-[100%] justify-center position-absolute z-10 overflow-auto"
       >
-        <!-- <app-url-playlist-insights></app-url-playlist-insights> -->
         <app-playlist-insights
-          [playlistId]="'3aI8mappd9DyYvgIkDWy7y'"
+          [playlistId]="playlistId"
         ></app-playlist-insights>
+      </div>
+      <div *ngIf="!playlistId" class="flex flex-col z-10 m-4 w-full h-full">
+        <p class="text-white text-[2rem] font-medium leading-none m-4 mb-8">Welcome to the playlist analysis page!</p>
+        <div class="flex bg-neutral-900/50 rounded-lg p-4 w-full">
+          <p class="text-white text-lg leading-none">Please insert the URL link of the playlist you wsih to analyse up here.</p>
+        </div>
       </div>
     </div>
   </div>

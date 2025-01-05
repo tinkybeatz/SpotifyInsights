@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,33 +9,27 @@ import { Router } from '@angular/router';
 export class UrlPlaylistInsightsComponent {
   constructor(private router: Router) {}
 
+  @Output() playlistSelected = new EventEmitter<string>();
+
   ngOnInit(): void {}
 
   submit() {
-    // https://open.spotify.com/playlist/3aI8mappd9DyYvgIkDWy7y?si=c6d807c5eed64387
     const formInputUrl = (document.getElementById('input') as HTMLInputElement)
       .value;
     if (!formInputUrl.startsWith('https://open.spotify.com/playlist/')) {
       alert('Invalid URL. Please enter a valid Spotify playlist URL.');
-      throw new Error(
-        'Invalid URL. Please enter a valid Spotify playlist URL.'
-      );
-    } else {
-      const playlist_id = formInputUrl.split('playlist/')[1].split('?')[0];
-      if (playlist_id === '') {
-        alert(
-          'Invalid URL : Unable to identify playlist id. Please enter a valid Spotify playlist URL.'
-        );
-        throw new Error(
-          'Invalid URL. Please enter a valid Spotify playlist URL.'
-        );
-      } else {
-        this.navigateToPlaylistInsights(playlist_id);
-      }
+      return;
     }
-  }
 
-  navigateToPlaylistInsights(playlist_id: string) {
-    this.router.navigate(['/playlistInsights', playlist_id]);
+    const playlistId = formInputUrl.split('playlist/')[1]?.split('?')[0];
+    if (!playlistId) {
+      alert('Unable to identify playlist ID. Please enter a valid URL.');
+      return;
+    }
+
+    // Emit the playlistId to the parent component
+    this.playlistSelected.emit(playlistId);
+
+    (document.getElementById('input') as HTMLInputElement).value = '';
   }
 }

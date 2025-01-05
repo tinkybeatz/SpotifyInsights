@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 import { CommonModule } from '@angular/common'; // Import CommonModule
@@ -38,6 +38,13 @@ export class PlaylistInsightsComponent implements OnInit {
   ngOnInit(): void {
     if (this.playlistId) {
       this.getPlaylistInfo(this.playlistId); // Call the Axios function
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['playlistId'] && this.playlistId) {
+      // Make the API call or do anything you need when playlistId changes
+      this.getPlaylistInfo(this.playlistId);
     }
   }
 
