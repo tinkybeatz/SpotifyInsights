@@ -1,5 +1,3 @@
-<app-gradient-background></app-gradient-background>
-<app-navbar></app-navbar>
 <style>
   .title {
     font-size: 6rem;
@@ -21,14 +19,15 @@
   }
 </style>
 
-<main class="z-10 font-sans flex flex-col min-h-screen">
+<main class="font-sans flex flex-col w-full">
   <div class="text-white m-2">
     <!-- playlist-insights.component.html -->
     <div *ngIf="playlistDataFiltered">
-        <p class="title">Playlist data</p>
-        <p class="small-title">Playlist data</p>
+        <p class="title">{{ playlistDataFiltered.name }}</p>
+        <p class="small-title">Playlist data :
+        </p>
       <div
-        class="grid grid-cols-6 justify-center p-1 m-1 rounded-lg h-[200px]"
+        class="grid grid-cols-5 justify-center p-1 m-1 rounded-lg h-[200px]"
       >
         <div
           *ngFor="let field of playlistDataFiltered.infoFields"
@@ -50,7 +49,6 @@
         >
       </p>
 
-      <h4>All Tracks:</h4>
       <h4>All Tracks:</h4>
       <ul>
         <li

@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { sortPlaylistInsights } from './playlist-insights-sorting';
-import { GradientBackgroundComponent } from '../shared/gradient-background/gradient-background.component';
-import { NavbarComponent } from "../shared/navbar/navbar.component";
 
 @Component({
   selector: 'app-playlist-insights',
   standalone: true,
   templateUrl: './playlist-insights.component.html',
-  imports: [CommonModule, GradientBackgroundComponent, NavbarComponent], // Add the CommonModule to the imports array
+  imports: [CommonModule], // Add the CommonModule to the imports array
 })
 export class PlaylistInsightsComponent implements OnInit {
-  playlistId: string | null = null;
+  @Input() playlistId: string | null = null;
   playlistDataFiltered:
     | {
+        name: string;
         infoFields: { label: string; key: string | number | boolean }[];
         actualTracksCount: number;
         externalUrl: string;
@@ -37,14 +36,9 @@ export class PlaylistInsightsComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.playlistId = params.get('playlist_id'); // Assign the parameter to the class property
-      console.log('Here is the given ID:', this.playlistId);
-
-      if (this.playlistId) {
-        this.getPlaylistInfo(this.playlistId); // Call the Axios function
-      }
-    });
+    if (this.playlistId) {
+      this.getPlaylistInfo(this.playlistId); // Call the Axios function
+    }
   }
 
   // Use axios to fetch data from the API

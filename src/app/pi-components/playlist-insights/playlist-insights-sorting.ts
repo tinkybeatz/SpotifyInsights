@@ -1,4 +1,5 @@
 export function sortPlaylistInsights(playlistInfo: any): {
+  name: string;
   infoFields: { label: string; key: string | number | boolean }[];
   actualTracksCount: number;
   externalUrl: string;
@@ -8,6 +9,7 @@ export function sortPlaylistInsights(playlistInfo: any): {
 } {
   if (!playlistInfo || typeof playlistInfo !== 'object') {
     return {
+      name: 'Unknown Playlist',
       infoFields: [],
       externalUrl: '',
       actualTracksCount: 0,
@@ -17,8 +19,9 @@ export function sortPlaylistInsights(playlistInfo: any): {
     };
   }
 
-  // Extracting the necessary fields
   const name = playlistInfo.name || 'Unknown Playlist';
+
+  // Extracting the necessary fields
   const trackCount = playlistInfo.tracks?.total || 0;
   const description = playlistInfo.description || 'No description available';
   const followers = playlistInfo.followers?.total || 0;
@@ -26,7 +29,6 @@ export function sortPlaylistInsights(playlistInfo: any): {
   const owner = playlistInfo.owner?.display_name || 'Unknown Owner';
 
   const infoFields = [
-    { label: 'Name', key: name },
     { label: 'Track Count', key: trackCount },
     { label: 'Description', key: description },
     { label: 'Followers', key: followers },
@@ -122,6 +124,7 @@ export function sortPlaylistInsights(playlistInfo: any): {
   const actualTracksCount = tracks.length || 0;
 
   return {
+    name,
     infoFields,
     externalUrl,
     actualTracksCount,

@@ -1,0 +1,35 @@
+<style>
+    .small-title {
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 20px 0px 20px 0px;
+    text-align: center;
+    box-decoration-break: slice;
+    line-height: 1;
+    color: white;
+  }
+</style>
+
+<div class="flex flex-col bg-black h-[100vh]">
+  <div class="small-title">Spotify Playlist Insights</div>
+  <app-navbar></app-navbar>
+  <div class="flex mb-4 mx-4 overflow-auto h-[100vh] shadow-inner">
+    <div class="gradient-bg">
+      <div>
+        <div class="g1"></div>
+        <div class="g2"></div>
+        <div class="g3"></div>
+        <div class="g4"></div>
+        <div class="g5"></div>
+      </div>
+      <div
+        class="flex w-[100%] justify-center position-absolute z-10 overflow-auto"
+      >
+        <!-- <app-url-playlist-insights></app-url-playlist-insights> -->
+        <app-playlist-insights
+          [playlistId]="'3aI8mappd9DyYvgIkDWy7y'"
+        ></app-playlist-insights>
+      </div>
+    </div>
+  </div>
+</div>

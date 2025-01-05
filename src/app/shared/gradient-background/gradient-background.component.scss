@@ -1,14 +1,14 @@
 :root {
-    --color-bg1: rgb(0, 0, 0);
-    --color-bg2: rgb(0, 0, 0);
-    --color1: 18, 113, 255;
-    --color2: 221, 74, 255;
-    --color3: 100, 220, 255;
-    --color4: 200, 50, 50;
-    --color5: 180, 180, 50;
-    --color-interactive: 140, 100, 255;
-    --circle-size: 80%;
-    --blending: hard-light;
+  :root {
+    --color-bg1: rgb(23, 82, 32);
+    --color-bg2: rgb(0, 60, 2);
+    --color1: 0, 5, 0;
+    --color2: 0, 15, 0;
+    --color3: 0, 25, 0;
+    --color4: 9, 35, 4;
+    --color5: 14, 45, 0;
+    --circle-size: 130%;
+  }
   }
   
   @keyframes moveInCircle {

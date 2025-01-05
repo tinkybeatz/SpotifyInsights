@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { GradientBackgroundComponent } from '../shared/gradient-background/gradient-background.component';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
 
 @Component({
-  selector: 'app-playlist-insights',
+  selector: 'app-url-playlist-insights',
   standalone: true,
   templateUrl: './url-playlist-insights.component.html',
-  imports: [GradientBackgroundComponent, NavbarComponent], // Add the CommonModule to the imports array
 })
 export class UrlPlaylistInsightsComponent {
   constructor(private router: Router) {}
