@@ -1,32 +1,44 @@
+<app-gradient-background></app-gradient-background>
+<app-navbar></app-navbar>
 <style>
-  .tab {
-    display: flex;
-    background-color: rgb(75 85 99);
-    margin: 4px;
-    border-radius: 6px;
-    justify-content: center;
-    align-items: center;
+  .title {
+    font-size: 6rem;
+    font-weight: 700;
+    color: white;
+    padding: 0px 20px 0px 20px;
+    box-decoration-break: slice;
+    margin: 20px;
+    line-height: 1;
+  }
+
+  .small-title {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 0px 20px 0px 20px;
+    box-decoration-break: slice;
+    margin: 20px;
+    line-height: 1;
   }
 </style>
 
-<main class="bg-gray-950 font-sans flex flex-col min-h-screen">
-  <div class="text-green-600 font-semibold text-2xl m-5">
-    Here is your playlist data
-    <p id="playlist_id"></p>
-  </div>
-
-  <div class="text-green-600 mx-2 mb-2">
+<main class="z-10 font-sans flex flex-col min-h-screen">
+  <div class="text-white m-2">
     <!-- playlist-insights.component.html -->
-
     <div *ngIf="playlistDataFiltered">
-      <h3>Playlist Information:</h3>
-      <div class="grid grid-cols-6 bg-gray-700 justify-center p-1 m-1 rounded-lg h-[100px]">
-        <p class="tab">Name: {{ playlistDataFiltered.name }}</p>
-        <p class="tab">Track Count: {{ playlistDataFiltered.trackCount }}</p>
-        <p class="tab">Description: {{ playlistDataFiltered.description }}</p>
-        <p class="tab">Followers: {{ playlistDataFiltered.followers }}</p>
-        <p class="tab">Collaborative: {{ playlistDataFiltered.collaborative }}</p>
-        <p class="tab">Owner: {{ playlistDataFiltered.owner }}</p>
+        <p class="title">Playlist data</p>
+        <p class="small-title">Playlist data</p>
+      <div
+        class="grid grid-cols-6 justify-center p-1 m-1 rounded-lg h-[200px]"
+      >
+        <div
+          *ngFor="let field of playlistDataFiltered.infoFields"
+          class="flex flex-col bg-gray-800/50 m-1 rounded-md"
+        >
+          <div class="h-1/3 content-center text-center rounded-t-md font-semibold text-xl">{{ field.label }}</div>
+          <div class="h-2/3 bg-gray-700/25 p-2 rounded-b-md font-normal text-lg">
+            {{ field.key }}
+          </div>
+        </div>
       </div>
       <p>
         External URL:

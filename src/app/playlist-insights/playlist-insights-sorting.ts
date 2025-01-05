@@ -1,25 +1,15 @@
 export function sortPlaylistInsights(playlistInfo: any): {
-  name: string;
-  trackCount: number;
-  description: string;
-  followers: number;
-  collaborative: boolean;
-  externalUrl: string;
-  owner: string;
+  infoFields: { label: string; key: string | number | boolean }[];
   actualTracksCount: number;
+  externalUrl: string;
   tracks: { trackName: string; artists: string[]; album: string; link: string }[];
   albums: { albumName: string; artists: string[]; nbSongsInPlaylist: number }[];
   artists: { artistName: string; nbSongsInPlaylist: number }[];
 } {
   if (!playlistInfo || typeof playlistInfo !== 'object') {
     return {
-      name: 'Unknown Playlist',
-      trackCount: 0,
-      description: 'No description available',
-      followers: 0,
-      collaborative: false,
+      infoFields: [],
       externalUrl: '',
-      owner: 'Unknown Owner',
       actualTracksCount: 0,
       tracks: [],
       albums: [],
@@ -33,8 +23,18 @@ export function sortPlaylistInsights(playlistInfo: any): {
   const description = playlistInfo.description || 'No description available';
   const followers = playlistInfo.followers?.total || 0;
   const collaborative = playlistInfo.collaborative || false;
-  const externalUrl = playlistInfo.external_urls?.spotify || '';
   const owner = playlistInfo.owner?.display_name || 'Unknown Owner';
+
+  const infoFields = [
+    { label: 'Name', key: name },
+    { label: 'Track Count', key: trackCount },
+    { label: 'Description', key: description },
+    { label: 'Followers', key: followers },
+    { label: 'Collaborative', key: collaborative },
+    { label: 'Owner', key: owner },
+  ];
+
+  const externalUrl = playlistInfo.external_urls?.spotify || '';
 
   // Extracting track details
   const tracks =
@@ -122,13 +122,8 @@ export function sortPlaylistInsights(playlistInfo: any): {
   const actualTracksCount = tracks.length || 0;
 
   return {
-    name,
-    trackCount,
-    description,
-    followers,
-    collaborative,
+    infoFields,
     externalUrl,
-    owner,
     actualTracksCount,
     tracks,
     albums,

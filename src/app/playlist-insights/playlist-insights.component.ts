@@ -3,28 +3,36 @@ import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { sortPlaylistInsights } from './playlist-insights-sorting';
+import { GradientBackgroundComponent } from '../shared/gradient-background/gradient-background.component';
+import { NavbarComponent } from "../shared/navbar/navbar.component";
 
 @Component({
   selector: 'app-playlist-insights',
   standalone: true,
   templateUrl: './playlist-insights.component.html',
-  imports: [CommonModule], // Add the CommonModule to the imports array
+  imports: [CommonModule, GradientBackgroundComponent, NavbarComponent], // Add the CommonModule to the imports array
 })
 export class PlaylistInsightsComponent implements OnInit {
   playlistId: string | null = null;
-  playlistDataFiltered: {
-    name: string;
-    trackCount: number;
-    description: string;
-    followers: number;
-    collaborative: boolean;
-    externalUrl: string;
-    owner: string;
-    actualTracksCount: number;
-    tracks: { trackName: string; artists: string[]; album: string; link: string }[];
-    albums: { albumName: string; artists: string[]; nbSongsInPlaylist: number }[];
-    artists: { artistName: string; nbSongsInPlaylist: number }[];
-  } | undefined;
+  playlistDataFiltered:
+    | {
+        infoFields: { label: string; key: string | number | boolean }[];
+        actualTracksCount: number;
+        externalUrl: string;
+        tracks: {
+          trackName: string;
+          artists: string[];
+          album: string;
+          link: string;
+        }[];
+        albums: {
+          albumName: string;
+          artists: string[];
+          nbSongsInPlaylist: number;
+        }[];
+        artists: { artistName: string; nbSongsInPlaylist: number }[];
+      }
+    | undefined;
 
   constructor(private route: ActivatedRoute) {}
 
