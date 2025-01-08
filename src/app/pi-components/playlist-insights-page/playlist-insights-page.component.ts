@@ -20,8 +20,11 @@ import { CommonModule } from '@angular/common';
 export class PlaylistInsightsPageComponent {
   playlistId: string | null = null;
 
-  // Handler to receive playlistId from the child (URL form)
   onPlaylistSelected(newId: string) {
     this.playlistId = newId;
+  }
+
+  resetId(){
+    this.playlistId = null;
   }
 }

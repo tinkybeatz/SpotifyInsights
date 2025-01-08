@@ -35,6 +35,8 @@ export class PlaylistInsightsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {}
 
+  currentMenu: string = 'albums';
+
   ngOnInit(): void {
     if (this.playlistId) {
       this.getPlaylistInfo(this.playlistId); // Call the Axios function
@@ -46,6 +48,10 @@ export class PlaylistInsightsComponent implements OnInit {
       // Make the API call or do anything you need when playlistId changes
       this.getPlaylistInfo(this.playlistId);
     }
+  }
+
+  changeMenu(menu: string) {
+    this.currentMenu = menu;
   }
 
   // Use axios to fetch data from the API

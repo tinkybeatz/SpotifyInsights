@@ -9,9 +9,9 @@
   }
 </style>
 
-<div class="flex flex-col bg-neutral-900 h-[100vh]">
+<div class="flex flex-col bg-neutral-900 h-[100vh] w-full grow">
   <div class="grid grid-cols-3 gap-4 mx-10">
-    <div class="col-span-1 small-title text-end">Spotify Playlist Insights</div>
+    <button class="col-span-1 small-title text-end" (click)="resetId()">Spotify Playlist Insights</button>
     <div class="flex col-span-2 items-center">
       <app-url-playlist-insights
         (playlistSelected)="onPlaylistSelected($event)"
@@ -19,7 +19,7 @@
     </div>
   </div>
   <app-navbar></app-navbar>
-  <div class="flex mb-4 mx-4 overflow-auto h-[100vh] shadow-inner">
+  <div class="flex mb-4 mx-4 overflow-auto h-[100vh] shadow-inner grow">
     <div class="gradient-bg">
       <div>
         <div class="g1"></div>
@@ -30,13 +30,13 @@
       </div>
       <div
         *ngIf="playlistId"
-        class="flex w-[100%] justify-center position-absolute z-10 overflow-auto"
+        class="flex flex-col z-10 w-full h-full overflow-auto bg-black/25"
       >
         <app-playlist-insights
           [playlistId]="playlistId"
         ></app-playlist-insights>
       </div>
-      <div *ngIf="!playlistId" class="flex flex-col z-10 m-4 w-full h-full">
+      <div *ngIf="!playlistId" class="flex flex-col z-10 p-4 w-full h-full bg-black/25">
         <p class="text-white text-[2rem] font-medium leading-none m-4 mb-8">Welcome to the playlist analysis page!</p>
         <div class="flex bg-neutral-900/50 rounded-lg p-4 w-full">
           <p class="text-white text-lg leading-none">Please insert the URL link of the playlist you wsih to analyse up here.</p>
