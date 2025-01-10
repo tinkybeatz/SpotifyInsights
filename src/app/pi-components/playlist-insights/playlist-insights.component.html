@@ -15,36 +15,12 @@
     margin: 0px 25px 25px 25px;
     line-height: 1;
   }
-
-  /* HTML: <div class="loader"></div> */
-  .loader {
-    width: 100px;
-    aspect-ratio: 4;
-    --_g: no-repeat radial-gradient(circle closest-side, #ffffff 90%, #ffffff00);
-    background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
-    background-size: calc(100% / 3) 100%;
-    animation: l7 1s infinite linear;
-  }
-  @keyframes l7 {
-    33% {
-      background-size: calc(100% / 3) 0%, calc(100% / 3) 100%,
-        calc(100% / 3) 100%;
-    }
-    50% {
-      background-size: calc(100% / 3) 100%, calc(100% / 3) 0%,
-        calc(100% / 3) 100%;
-    }
-    66% {
-      background-size: calc(100% / 3) 100%, calc(100% / 3) 100%,
-        calc(100% / 3) 0%;
-    }
-  }
 </style>
 
 <div class="flex font-sans">
   <div class="flex text-white m-3 w-full grow">
     <!-- playlist-insights.component.html -->
-    <div *ngIf="playlistDataFiltered" class="flex flex-col w-full grow">
+    <div *ngIf="playlistDataFiltered && loading == false" class="flex flex-col w-full grow">
       <a
         class="title"
         href="{{ playlistDataFiltered.externalUrl }}"
@@ -78,19 +54,19 @@
         <div class="flex w-full justify-center mb-4">
           <div class="grid grid-cols-3 w-[400px] h-[60px] gap-2">
             <button
-              class="col-span-1 bg-black/25 hover:bg-black/50 active:bg-black/75 rounded-md"
+              class="col-span-1 bg-black/25 hover:bg-black/50 active:bg-black/75 rounded-md {{ currentMenu == 'albums' ? 'ring-1 ring-white' : '' }}"
               (click)="changeMenu('albums')"
             >
               albums
             </button>
             <button
-              class="col-span-1 bg-black/25 hover:bg-black/50 active:bg-black/75 rounded-md"
+              class="col-span-1 bg-black/25 hover:bg-black/50 active:bg-black/75 rounded-md {{ currentMenu == 'artists' ? 'ring-1 ring-white' : '' }}"
               (click)="changeMenu('artists')"
             >
               artists
             </button>
             <button
-              class="col-span-1 bg-black/25 hover:bg-black/50 active:bg-black/75 rounded-md"
+              class="col-span-1 bg-black/25 hover:bg-black/50 active:bg-black/75 rounded-md {{ currentMenu == 'tracks' ? 'ring-1 ring-white' : '' }}"
               (click)="changeMenu('tracks')"
             >
               tracks
@@ -160,10 +136,10 @@
     </div>
 
     <div
-      *ngIf="!playlistDataFiltered"
+      *ngIf="loading === true"
       class="flex w-full py-20 justify-center items-center"
     >
-      <div class="loader"></div>
+      <app-loading-animation></app-loading-animation>
     </div>
   </div>
 </div>
