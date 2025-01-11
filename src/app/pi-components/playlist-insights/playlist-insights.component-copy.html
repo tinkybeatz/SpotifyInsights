@@ -1,12 +1,11 @@
 <style>
   .title {
-    font-size: 2rem;
-    font-weight: 500;
-    margin: 0px 0px 10px 0px;
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 0px 0px 0px 16px;
     color: white;
     box-decoration-break: slice;
     line-height: 1;
-    text-align: center;
   }
 </style>
 
@@ -21,21 +20,30 @@
         class="{{ rightBig == true ? 'w-1/3' : 'w-2/3' }} transition-all duration-500 overflow-y-hidden"
       >
         <div class="flex flex-col h-full p-4">
-          <a
-            class="title"
-            href="{{ playlistDataFiltered.externalUrl }}"
-            target="_blank"
-            >{{ playlistDataFiltered.name }}</a
-          >
-          <p class="mb-2 pl-3">Basic informations :</p>
+          <div class="flex items-center mb-2">
+            <img
+              class="h-24 object-cover rounded-md"
+              [src]="playlistDataFiltered.image"
+              alt="playlist image"
+            />
+            <a
+              class="title"
+              href="{{ playlistDataFiltered.externalUrl }}"
+              target="_blank"
+              >{{ playlistDataFiltered.name }}</a
+            >
+          </div>
+          <p class="mb-2">Basic informations :</p>
           <div
-            class="flex flex-col rounded-md bg-white/50 border border-white shadow-lg divide-y"
+            class="flex flex-col rounded-md bg-neutral-900/50 shadow-lg divide-y divide-black"
           >
             <div
               *ngFor="let field of playlistDataFiltered.infoFields"
-              class="grid grid-cols-4 divide-x"
+              class="grid grid-cols-4 divide-x divide-black"
             >
-              <div class="col-span-1 px-3 py-2 font-semibold text-lg leading-5">
+              <div
+                class="col-span-1 px-3 py-2 font-semibold text-lg leading-5 min-w-min"
+              >
                 {{ field.label }}
               </div>
               <div class="col-span-3 px-2 py-2 font-normal text-md leading-5">
@@ -49,88 +57,113 @@
 
       <!-- RIGHT PART -->
       <div
-        class="{{ rightBig == true ? 'w-2/3' : 'w-1/3' }} transition-all duration-500 bg-white/50 border-l border-white shadow-lg"
+        class="{{ rightBig == true ? 'w-2/3' : 'w-1/3' }} transition-all duration-500 bg-neutral-900/50 shadow-xl"
       >
         <div class="flex flex-col h-full space-y-4 pt-4">
           <div class="">
-            <div class="grid grid-cols-3 w-[300px] h-[40px] gap-2 mx-auto">
+            <div class="grid grid-cols-4 w-[400px] h-[40px] gap-2 mx-auto">
               <button
-                class="col-span-1 bg-black/25 hover:bg-black/50 active:bg-black/75 rounded-md {{ currentMenu == 'albums' ? 'ring-1 ring-white' : '' }}"
+                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black text-white rounded-md {{ currentMenu == 'stats' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-500 via-green-500 to-green-800' : '' }}"
+                (click)="changeMenu('stats')"
+                disabled
+              >
+                Stats
+              </button>
+              <button
+                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black text-white rounded-md {{ currentMenu == 'albums' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-500 via-green-500 to-green-800' : '' }}"
                 (click)="changeMenu('albums')"
               >
-                albums
+                Albums
               </button>
               <button
-                class="col-span-1 bg-black/25 hover:bg-black/50 active:bg-black/75 rounded-md {{ currentMenu == 'artists' ? 'ring-1 ring-white' : '' }}"
+                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black text-white rounded-md {{ currentMenu == 'artists' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-green-500 to-green-800' : '' }}"
                 (click)="changeMenu('artists')"
               >
-                artists
+                Artists
               </button>
               <button
-                class="col-span-1 bg-black/25 hover:bg-black/50 active:bg-black/75 rounded-md {{ currentMenu == 'tracks' ? 'ring-1 ring-white' : '' }}"
+                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black text-white rounded-md {{ currentMenu == 'tracks' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-green-500 to-green-800' : '' }}"
                 (click)="changeMenu('tracks')"
               >
-                tracks
+                All tracks
               </button>
             </div>
           </div>
 
           <!-- Scrollable DIV -->
-          <div class="flex-1 overflow-y-scroll px-4 pb-4">
-            <div
-              *ngIf="currentMenu == 'albums'"
-              class="space-y-2"
-            >
-              <div class="grid grid-cols-1 w-full gap-2">
-                <div
+          <div class="flex-1 overflow-y-scroll px-4 pb-4" #scrollableDiv>
+            <div *ngIf="currentMenu == 'stats'" class="space-y-2">test</div>
+
+            <div *ngIf="currentMenu == 'albums'" class="space-y-2">
+              <div class="grid grid-cols-1 w-full gap-2 justify-center">
+                <a
                   *ngFor="let album of playlistDataFiltered.albums"
-                  class="col-span-1 bg-gray-800 p-2 rounded-md"
+                  href="{{ album.albumLink }}"
+                  target="_blank"
+                  class="flex bg-neutral-900 p-2 rounded-md no-underline"
                   [ngClass]="{
                 'text-red-600': album.albumName === 'Unknown Album'
               }"
                 >
-                  <strong>{{ album.albumName }}</strong> by {{ album.artists }}
-                  <strong>|</strong> this playlist has : {{
-                  album.nbSongsInPlaylist }} songs of this album
-                </div>
+                  <div class="h-full content-center">
+                    <img
+                      src="{{ album.image }}"
+                      alt="album.image"
+                      class="h-20 w-20 object-contain rounded-[4px]"
+                    />
+                  </div>
+                  <div class="flex-col ml-2 content-center">
+                    <strong class="text-xl">{{ album.albumName }}</strong>
+                    <p>{{ album.artists }}</p>
+                    This playlist contains
+                    <strong>{{ album.nbSongsInPlaylist }}</strong> songs of this
+                    album
+                  </div>
+                </a>
               </div>
             </div>
 
-            <div
-              *ngIf="currentMenu == 'artists'"
-              class="space-y-2"
-            >
+            <div *ngIf="currentMenu == 'artists'" class="space-y-2">
               <div class="grid grid-cols-1 w-full gap-2">
-                <div
+                <a
                   *ngFor="let artist of playlistDataFiltered.artists"
-                  class="col-span-1 bg-gray-800 p-2 rounded-md"
+                  href="{{ artist.artistLink == 'Unknown Artist Links' ? '/playlistInsights' : artist.artistLink }}"
+                  target="_blank"
+                  class="col-span-1 bg-neutral-900 p-2 rounded-md no-underline"
                   [ngClass]="{
                 'text-red-600': artist.artistName === 'Unknown Artist'
               }"
                 >
                   <strong>{{ artist.artistName }}</strong>
-                  <strong> |</strong> this playlist has : {{
+                  <strong> |</strong> This playlist contains {{
                   artist.nbSongsInPlaylist }} songs of this artist
-                </div>
+                </a>
               </div>
             </div>
 
-            <div
-              *ngIf="currentMenu == 'tracks'"
-              class="space-y-2"
-            >
+            <div *ngIf="currentMenu == 'tracks'" class="space-y-2">
               <div class="grid grid-cols-1 w-full gap-2">
-                <div
+                <a
                   *ngFor="let track of playlistDataFiltered.tracks"
-                  class="bg-gray-800 p-2 rounded-md"
+                  href="{{ track.link == 'unknown link' ? '/playlistInsights' : track.link }}"
+                  target="_blank"
+                  class="flex bg-neutral-900 p-2 rounded-md no-underline"
                   [ngClass]="{
                 'text-red-600': track.trackName === 'Unknown Track'
-              }"
+                }"
                 >
-                  <strong>{{ track.trackName }}</strong> by {{ track.artists }}
-                  <strong>|</strong> {{ track.album }} <strong>|</strong>
-                  {{ track.link }}
-                </div>
+                  <div class="h-full content-center">
+                    <img
+                      src="{{ track.image }}"
+                      alt="album.image"
+                      class="h-20 w-20 object-contain rounded-[4px]"
+                    />
+                  </div>
+                  <div class="flex-col ml-2 content-center">
+                    <strong class="text-xl">{{ track.trackName }}</strong>
+                    <p>{{ track.artists }}</p>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
