@@ -11,9 +11,12 @@
 
 <div class="flex flex-col bg-neutral-900 h-screen">
   <div class="grid grid-cols-3 gap-4 mx-10">
-    <button class="col-span-1 small-title text-end" (click)="resetId()">
-      Spotify Playlist Insights
-    </button>
+    <div class="flex col-span-1 small-title justify-end">
+      <button class="flex" (click)="resetId()">
+        <img src="../../../../public/favicon.ico" alt="logo">
+        Spotify Playlist Insights
+      </button>
+    </div>
     <div class="flex col-span-2 items-center">
       <app-url-playlist-insights
         (playlistSelected)="onPlaylistSelected($event)"
