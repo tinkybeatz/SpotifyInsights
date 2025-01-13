@@ -17,7 +17,7 @@
     >
       <!-- LEFT PART -->
       <div
-        class="{{ rightBig == true ? 'w-1/3' : 'w-2/3' }} transition-all duration-500 overflow-y-hidden"
+        class="{{ rightBig == true ? 'w-1/3' : 'w-1/2' }} transition-all duration-500 overflow-y-hidden"
       >
         <div class="flex flex-col h-full p-4">
           <div class="flex items-center mb-2">
@@ -51,42 +51,58 @@
               </div>
             </div>
           </div>
-          <button (click)="rightBigToggle()">TEST</button>
+          <!-- <button (click)="rightBigToggle()">TEST</button> -->
         </div>
       </div>
 
       <!-- RIGHT PART -->
       <div
-        class="{{ rightBig == true ? 'w-2/3' : 'w-1/3' }} transition-all duration-500 bg-neutral-900/50 shadow-xl"
+        class="{{ rightBig == true ? 'w-2/3' : 'w-1/2' }} transition-all duration-500 bg-neutral-900/50 shadow-xl"
       >
         <div class="flex flex-col h-full space-y-4 pt-4">
-          <div class="">
-            <div class="grid grid-cols-4 w-[400px] h-[40px] gap-2 mx-auto">
+          <div class="flex justify-between mx-4">
+            <div class="grid grid-cols-4 w-[400px] h-[40px] gap-2">
               <button
-                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black text-white rounded-md {{ currentMenu == 'stats' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-500 via-green-500 to-green-800' : '' }}"
+                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black rounded-md {{ currentMenu == 'stats' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-500 via-green-500 to-green-800' : '' }}"
                 (click)="changeMenu('stats')"
                 disabled
               >
                 Stats
               </button>
               <button
-                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black text-white rounded-md {{ currentMenu == 'albums' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-500 via-green-500 to-green-800' : '' }}"
+                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black rounded-md {{ currentMenu == 'albums' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-500 via-green-500 to-green-800' : '' }}"
                 (click)="changeMenu('albums')"
               >
                 Albums
               </button>
               <button
-                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black text-white rounded-md {{ currentMenu == 'artists' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-green-500 to-green-800' : '' }}"
+                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black rounded-md {{ currentMenu == 'artists' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-green-500 to-green-800' : '' }}"
                 (click)="changeMenu('artists')"
               >
                 Artists
               </button>
               <button
-                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black text-white rounded-md {{ currentMenu == 'tracks' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-green-500 to-green-800' : '' }}"
+                class="col-span-1 bg-black/50 hover:bg-black/75 active:bg-black rounded-md {{ currentMenu == 'tracks' ? 'text-black font-semibold text-md [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-green-500 to-green-800' : '' }}"
                 (click)="changeMenu('tracks')"
               >
                 All tracks
               </button>
+            </div>
+            <div [ngSwitch]="currentMenu">
+              <div *ngSwitchCase="'albums'">
+                <app-sorting-dropdown-button
+                  [options]="dropdownOptionsAlbums"
+                  (optionSelected)="handleSort($event, playlistDataFiltered.albums)"
+                  menu="Albums"
+                ></app-sorting-dropdown-button>
+              </div>
+              <div *ngSwitchCase="'artists'">
+                <app-sorting-dropdown-button
+                  [options]="dropdownOptionsArtists"
+                  (optionSelected)="handleSort($event, playlistDataFiltered.artists)"
+                  menu="Artists"
+                ></app-sorting-dropdown-button>
+              </div>
             </div>
           </div>
 
@@ -115,9 +131,7 @@
                   <div class="flex-col ml-2 content-center">
                     <strong class="text-xl">{{ album.albumName }}</strong>
                     <p>{{ album.artists }}</p>
-                    This playlist contains
-                    <strong>{{ album.nbSongsInPlaylist }}</strong> songs of this
-                    album
+                    <strong>{{album.nbSongsInPlaylist}}</strong> songs in this playlist
                   </div>
                 </a>
               </div>
@@ -135,8 +149,8 @@
               }"
                 >
                   <strong>{{ artist.artistName }}</strong>
-                  <strong> |</strong> This playlist contains {{
-                  artist.nbSongsInPlaylist }} songs of this artist
+                  <strong> |</strong> This playlist contains 
+                  {{ artist.nbSongsInPlaylist }} songs of this artist
                 </a>
               </div>
             </div>

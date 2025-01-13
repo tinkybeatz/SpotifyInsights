@@ -9,6 +9,8 @@ import { Location } from '@angular/common';
 })
 export class NavbarComponent {
   constructor(private router: Router, private location: Location) {}
+  languageNav: string = navigator.language;
+  language: string = 'English';
 
   navigateToHome() {
     this.router.navigate(['/']);
@@ -20,5 +22,9 @@ export class NavbarComponent {
 
   forward() {
     this.location.forward();
+  }
+
+  translate() {
+    alert('coming soon');
   }
 }

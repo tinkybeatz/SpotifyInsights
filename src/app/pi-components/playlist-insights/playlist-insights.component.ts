@@ -8,15 +8,18 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
-import { CommonModule } from '@angular/common'; // Import CommonModule
-import { sortPlaylistInsights } from './playlist-insights-sorting';
+import { CommonModule } from '@angular/common';
+import { filterPlaylistInsights } from './playlist-insights-filtering';
+import { sortData } from './playlist-insights-sorting';
+
 import { LoadingAnimationComponent } from '../../shared/loading-animation/loading-animation.component';
+import { SortingDropdownButtonComponent } from '../../shared/sorting-dropdown-button/sorting-dropdown-button.component';
 
 @Component({
   selector: 'app-playlist-insights',
   standalone: true,
   templateUrl: './playlist-insights.component-copy.html',
-  imports: [CommonModule, LoadingAnimationComponent], // Add the CommonModule to the imports array
+  imports: [CommonModule, LoadingAnimationComponent, SortingDropdownButtonComponent], // Add the CommonModule to the imports array
 })
 export class PlaylistInsightsComponent implements OnInit {
   @Input() playlistId: string | null = null;
@@ -58,6 +61,21 @@ export class PlaylistInsightsComponent implements OnInit {
   currentMenu: string = 'albums';
   rightBig: boolean = false;
 
+  dropdownOptionsAlbums = [
+    { label: 'Number of songs ASC', value: 'songASC' },
+    { label: 'Number of songs DESC', value: 'songDESC' },
+  ];
+
+  dropdownOptionsArtists = [
+    { label: 'Number of songs ASC', value: 'songASC' },
+    { label: 'Number of songs DESC', value: 'songDESC' },
+  ];
+  
+  handleSort(selectedValue: { value: string; menu: string }, sortingData: any) {
+    console.log('sorting data : ', sortingData);
+    sortData(selectedValue.menu, selectedValue.value, sortingData);
+  }
+
   ngOnInit(): void {
     if (this.playlistId) {
       this.getPlaylistInfo(this.playlistId); // Call the Axios function
@@ -85,6 +103,10 @@ export class PlaylistInsightsComponent implements OnInit {
     }, 0); // Delay to ensure the DOM updates
   }
 
+  sortData(sortBy: string, dataType: string) {
+    console.log('Sorting', dataType,' by ', sortBy);
+  }
+
   // Use axios to fetch data from the API
   async getPlaylistInfo(playlistId: string): Promise<void> {
     this.loading = true;
@@ -93,9 +115,7 @@ export class PlaylistInsightsComponent implements OnInit {
         `https://spotify-insights-api.vercel.app/playlist_info/${playlistId}`
         // `http://127.0.0.1:5000/playlist_info/${playlistId}`
       );
-      console.log('Playlist info:', response.data);
-      this.playlistDataFiltered = sortPlaylistInsights(response.data);
-      console.log('1 :', this.playlistDataFiltered.artists);
+      this.playlistDataFiltered = filterPlaylistInsights(response.data);
     } catch (error) {
       console.error('Error fetching playlist info:', error);
     }

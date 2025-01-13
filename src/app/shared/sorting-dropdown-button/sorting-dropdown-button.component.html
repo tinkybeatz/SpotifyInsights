@@ -1,0 +1,53 @@
+<div class="relative inline-block w-auto text-left">
+  <!-- Button to toggle dropdown -->
+  <div>
+    <button
+      type="button"
+      class="inline-flex h-[40px] w-full justify-center text-md rounded-md bg-black/50 pl-4 pr-2 py-2 text-white hover:bg-black/75"
+      (click)="toggleDropdown()"
+      [attr.aria-expanded]="isOpen"
+      aria-haspopup="true"
+    >
+      <div class="flex items-center">
+        {{ selectedLabel || "Sort" }}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-6 h-6 inline-block visible"
+          style="display: block; opacity: 1; z-index: 10"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+    </button>
+  </div>
+
+  <!-- Dropdown menu -->
+  <div
+    *ngIf="isOpen"
+    class="absolute right-0 z-10 mt-2 p-1 origin-top-right rounded-lg bg-black shadow-lg focus:outline-none"
+    role="menu"
+    aria-orientation="vertical"
+  >
+    <div class="flex flex-col text-nowrap gap-y-1" role="none">
+      <div
+        class="block px-4 py-2 w-full text-left text-md rounded-md bg-neutral-900 text-white"
+      >
+        Sorting for <strong class="text-red-600">{{ menu }}</strong>
+      </div>
+      <button
+        *ngFor="let option of options"
+        (click)="selectOption(option, menu)"
+        class="block px-4 py-2 text-sm w-full text-left rounded-md text-white hover:bg-neutral-800"
+        role="menuitem"
+      >
+        {{ option.label }}
+      </button>
+    </div>
+  </div>
+</div>
