@@ -15,6 +15,45 @@ import { sortData } from './playlist-insights-sorting';
 import { LoadingAnimationComponent } from '../../shared/loading-animation/loading-animation.component';
 import { SortingDropdownButtonComponent } from '../../shared/sorting-dropdown-button/sorting-dropdown-button.component';
 
+interface Album {
+  albumName: string;
+  artists: string[];
+  nbSongsInPlaylist: number;
+  image: string;
+  albumLink: string;
+}
+
+interface Artist {
+  artistName: string;
+  nbSongsInPlaylist: number;
+  artistLink: string;
+}
+
+interface Track {
+  trackName: string;
+  artists: string[];
+  album: string;
+  link: string;
+  image: string;
+  albumLink: string;
+  artistsLinks: string[];
+  duration: number;
+  added_at: string;
+}
+
+interface PlaylistStats {
+  totalAlbums: number;
+  albumWithMostTracks: Album;
+  totalArtists: number;
+  artistWithMostTracks: Artist;
+  totalTracks: number;
+  dateFirstAdded: Track;
+  numberOfFeaturings: number;
+  proportionOfFeaturings: string;
+  totalDuration: string;
+  averageTracksDuration: string;
+}
+
 @Component({
   selector: 'app-playlist-insights',
   standalone: true,
@@ -29,7 +68,6 @@ export class PlaylistInsightsComponent implements OnInit {
         name: string;
         image: string;
         infoFields: { label: string; key: string | number | boolean }[];
-        actualTracksCount: number;
         externalUrl: string;
         tracks: {
           trackName: string;
@@ -52,13 +90,14 @@ export class PlaylistInsightsComponent implements OnInit {
           nbSongsInPlaylist: number;
           artistLink: string;
         }[];
+        stats: PlaylistStats;
       }
     | undefined;
 
   constructor(private route: ActivatedRoute) {}
 
   loading: boolean = false;
-  currentMenu: string = 'albums';
+  currentMenu: string = 'stats';
   rightBig: boolean = false;
 
   dropdownOptionsAlbums = [
@@ -88,7 +127,7 @@ export class PlaylistInsightsComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['playlistId'] && this.playlistId) {
-      this.changeMenu('albums');
+      this.changeMenu('stats');
       // Make the API call or do anything you need when playlistId changes
       this.getPlaylistInfo(this.playlistId);
     }
@@ -116,6 +155,7 @@ export class PlaylistInsightsComponent implements OnInit {
         // `http://127.0.0.1:5000/playlist_info/${playlistId}`
       );
       this.playlistDataFiltered = filterPlaylistInsights(response.data);
+      console.log('playlistDataFiltered', this.playlistDataFiltered);
     } catch (error) {
       console.error('Error fetching playlist info:', error);
     }

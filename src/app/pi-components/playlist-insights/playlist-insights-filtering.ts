@@ -1,8 +1,48 @@
+import { statsGathering } from './playlist-insights-stats-gathering';
+
+interface Album {
+  albumName: string;
+  artists: string[];
+  nbSongsInPlaylist: number;
+  image: string;
+  albumLink: string;
+}
+
+interface Artist {
+  artistName: string;
+  nbSongsInPlaylist: number;
+  artistLink: string;
+}
+
+interface Track {
+  trackName: string;
+  artists: string[];
+  album: string;
+  link: string;
+  image: string;
+  albumLink: string;
+  artistsLinks: string[];
+  duration: number;
+  added_at: string;
+}
+
+interface PlaylistStats {
+  totalAlbums: number;
+  albumWithMostTracks: Album;
+  totalArtists: number;
+  artistWithMostTracks: Artist;
+  totalTracks: number;
+  dateFirstAdded: Track;
+  numberOfFeaturings: number;
+  proportionOfFeaturings: string;
+  totalDuration: string;
+  averageTracksDuration: string;
+}
+
 export function filterPlaylistInsights(playlistInfo: any): {
   name: string;
   image: string;
   infoFields: { label: string; key: string | number | boolean }[];
-  actualTracksCount: number;
   externalUrl: string;
   tracks: {
     trackName: string;
@@ -12,6 +52,8 @@ export function filterPlaylistInsights(playlistInfo: any): {
     image: string;
     albumLink: string;
     artistsLinks: string[];
+    duration: number;
+    added_at: string;
   }[];
   albums: {
     albumName: string;
@@ -25,6 +67,7 @@ export function filterPlaylistInsights(playlistInfo: any): {
     nbSongsInPlaylist: number;
     artistLink: string;
   }[];
+  stats: PlaylistStats;
 } {
   if (!playlistInfo || typeof playlistInfo !== 'object') {
     return {
@@ -32,10 +75,41 @@ export function filterPlaylistInsights(playlistInfo: any): {
       image: 'Unknown Image',
       infoFields: [],
       externalUrl: '',
-      actualTracksCount: 0,
       tracks: [],
       albums: [],
       artists: [],
+      stats: {
+        totalAlbums: 0,
+        albumWithMostTracks: {
+          albumName: '',
+          artists: [],
+          nbSongsInPlaylist: 0,
+          image: '',
+          albumLink: '',
+        },
+        totalArtists: 0,
+        artistWithMostTracks: {
+          artistName: '',
+          nbSongsInPlaylist: 0,
+          artistLink: '',
+        },
+        totalTracks: 0,
+        dateFirstAdded: {
+          trackName: '',
+          artists: [],
+          album: '',
+          link: '',
+          image: '',
+          albumLink: '',
+          artistsLinks: [],
+          duration: 0,
+          added_at: '',
+        },
+        numberOfFeaturings: 0,
+        proportionOfFeaturings: '',
+        totalDuration: '',
+        averageTracksDuration: '',
+      },
     };
   }
 
@@ -43,17 +117,16 @@ export function filterPlaylistInsights(playlistInfo: any): {
   const image = playlistInfo.images?.[0]?.url || 'Unknown Image';
 
   // Extracting the necessary fields for infoFields
-  const trackCount = playlistInfo.tracks?.total || 0;
+  const totalTracks = playlistInfo.tracks?.total || 0;
   const description = playlistInfo.description || 'No description available';
   const followers = playlistInfo.followers?.total || 0;
   const collaborative = playlistInfo.collaborative || false;
   const owner = playlistInfo.owner?.display_name || 'Unknown Owner';
 
   const infoFields = [
-    { label: 'Track Count', key: trackCount },
     { label: 'Description', key: description },
     { label: 'Followers', key: followers },
-    { label: 'Collaborative', key: collaborative ? 'Yes' : 'No' },
+    { label: 'Collaborative', key: collaborative },
     { label: 'Owner', key: owner },
   ];
 
@@ -69,12 +142,14 @@ export function filterPlaylistInsights(playlistInfo: any): {
       artistsLinks:
         track.track?.artists
           ?.map((artist: any) => artist.external_urls.spotify)
-          .join(', ') || 'Unknown Artist Links',    
+          .join(', ') || 'Unknown Artist Links',
       album: track.track?.album?.name || 'Unknown Album',
       link: track.track?.external_urls?.spotify || 'unknown link',
       image: track.track?.album?.images[0]?.url || 'unknown image',
       albumLink:
         track.track?.album?.external_urls?.spotify || 'unknown album link',
+      duration: track.track?.duration_ms || 0,
+      added_at: track.added_at || 'Unknown Date',
     })) || [];
 
   interface Album {
@@ -168,14 +243,16 @@ export function filterPlaylistInsights(playlistInfo: any): {
 
   const actualTracksCount = tracks.length || 0;
 
+  const stats = statsGathering(playlistInfo, albums, artists, tracks);
+
   return {
     name,
     image,
     infoFields,
     externalUrl,
-    actualTracksCount,
     tracks,
     albums,
     artists,
+    stats,
   };
 }
