@@ -104,6 +104,7 @@ export function statsGathering(
       ? current
       : earliest;
   });
+  dateFirstAdded.added_at = formatDate(dateFirstAdded.added_at);
 
   // OK
   const numberOfFeaturings = tracks?.filter((track: any) => {
@@ -185,3 +186,11 @@ function formatDuration(duration: {
 
   return parts.join(' ');
 }
+
+function formatDate(isoString: string): string {
+    const dateObj = new Date(isoString);
+    const monthName = dateObj.toLocaleString("en-US", { month: "long" });
+    const day = dateObj.getDate(); 
+    const year = dateObj.getFullYear();
+    return `${day} ${monthName} ${year}`;
+  }

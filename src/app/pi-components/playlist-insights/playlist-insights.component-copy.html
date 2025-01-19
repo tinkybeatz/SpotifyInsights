@@ -110,29 +110,63 @@
 
             <!-- div 1 -->
             <div *ngIf="currentMenu == 'stats'" class="space-y-2">
-              <div class="grid grid-cols-3 w-full grow gap-2">
+              <!-- playlist creation date -->
+              <div class="bg-neutral-900 rounded-lg p-2">
+                <p class="pl-2 pb-2">
+                  <strong class="text-red-500"> Creation date</strong>
+                </p>
+                <div class="flex bg-neutral-800 p-2 rounded-md no-underline">
+                  <p>
+                    This playlist was created on :
+                    <strong class="text-red-500 text-lg"
+                      >{{
+                      playlistDataFiltered.stats.dateFirstAdded.added_at
+                      }}
+                    </strong></p>
+                </div>
+              </div>
+
+              <!-- Numbers -->
+              <div
+                class="grid grid-cols-3 w-full bg-neutral-900 rounded-lg p-2 grow gap-2"
+              >
+                <p class="col-span-3 pl-2">
+                  <strong class="text-purple-500">Numbers</strong>
+                </p>
                 <!-- nb albums -->
                 <div
-                  class="flex col-span-1 bg-neutral-900 p-2 rounded-md justify-center no-underline"
+                  class="flex col-span-1 bg-neutral-800 p-2 rounded-md justify-center no-underline"
                 >
-                  {{ playlistDataFiltered.stats.totalAlbums }} albums in this
-                  playlist
+                  <p>
+                    <strong class="text-purple-500"
+                      >{{ playlistDataFiltered.stats.totalAlbums }}
+                    </strong>
+                    albums
+                  </p>
                 </div>
 
                 <!-- nb artists -->
                 <div
-                  class="flex col-span-1 bg-neutral-900 p-2 rounded-md justify-center no-underline"
+                  class="flex col-span-1 bg-neutral-800 p-2 rounded-md justify-center no-underline"
                 >
-                  {{ playlistDataFiltered.stats.totalArtists }} artists in this
-                  playlist
+                  <p>
+                    <strong class="text-purple-500"
+                      >{{ playlistDataFiltered.stats.totalArtists }}
+                    </strong>
+                    artists
+                  </p>
                 </div>
 
                 <!-- nb tracks -->
                 <div
-                  class="flex col-span-1 bg-neutral-900 p-2 rounded-md justify-center no-underline"
+                  class="flex col-span-1 bg-neutral-800 p-2 rounded-md justify-center no-underline"
                 >
-                  {{ playlistDataFiltered.stats.totalTracks }} tracks in this
-                  playlist
+                  <p>
+                    <strong class="text-purple-500"
+                      >{{ playlistDataFiltered.stats.totalTracks }}
+                    </strong>
+                    tracks
+                  </p>
                 </div>
               </div>
 
@@ -144,7 +178,7 @@
                 <div class="relative">
                   <p class="pl-2 pb-2">
                     <strong class="text-yellow-500">Album</strong> that has the
-                    most songs in your playlist :
+                    most songs in your playlist
                   </p>
                   <a
                     href="{{ playlistDataFiltered.stats.albumWithMostTracks.albumLink }}"
@@ -196,7 +230,7 @@
                 <div class="relative flex flex-col w-full grow">
                   <p class="pl-2 pb-2">
                     <strong class="text-yellow-500">Artist</strong> that has the
-                    most songs in your playlist :
+                    most songs in your playlist
                   </p>
                   <a
                     href="{{ playlistDataFiltered.stats.artistWithMostTracks.artistLink == 'Unknown Artist Links' ? '/playlistInsights' : playlistDataFiltered.stats.artistWithMostTracks.artistLink }}"
@@ -214,9 +248,15 @@
                         playlistDataFiltered.stats.artistWithMostTracks.artistName
                         }}</strong
                       >
-                      This playlist contains {{
-                      playlistDataFiltered.stats.artistWithMostTracks.nbSongsInPlaylist
-                      }} songs of this artist
+                      <p>
+                        This playlist contains
+                        <strong
+                          >{{
+                          playlistDataFiltered.stats.artistWithMostTracks.nbSongsInPlaylist
+                          }}</strong
+                        >
+                        songs of this artist
+                      </p>
                     </div>
                   </a>
                   <img
@@ -228,36 +268,96 @@
               </div>
 
               <!-- 1st added track -->
-              <div class="flex bg-neutral-900 p-2 rounded-md no-underline">
-                {{ playlistDataFiltered.stats.dateFirstAdded.trackName }}
+              <div class="bg-neutral-900 rounded-lg p-2">
+                <p class="pl-2 pb-2">
+                  <strong class="text-green-500">First track</strong> added
+                </p>
+                <a
+                  href="{{ playlistDataFiltered.stats.dateFirstAdded.link == 'unknown link' ? '/playlistInsights' : playlistDataFiltered.stats.dateFirstAdded.link }}"
+                  target="_blank"
+                  class="flex bg-neutral-800 p-2 rounded-md no-underline"
+                  [ngClass]="{
+                  'text-red-600': playlistDataFiltered.stats.dateFirstAdded.trackName === 'Unknown Track'
+                  }"
+                >
+                  <div class="h-full content-center">
+                    <img
+                      src="{{ playlistDataFiltered.stats.dateFirstAdded.image }}"
+                      alt="album.image"
+                      class="h-20 w-20 object-contain rounded-[4px]"
+                    />
+                  </div>
+                  <div class="flex-col ml-2 content-center">
+                    <strong class="text-xl text-green-500"
+                      >{{ playlistDataFiltered.stats.dateFirstAdded.trackName
+                      }}</strong
+                    >
+                    <p>
+                      {{ playlistDataFiltered.stats.dateFirstAdded.artists }}
+                    </p>
+                  </div>
+                </a>
               </div>
 
-              <!-- playlist creation date -->
-              <div class="flex bg-neutral-900 p-2 rounded-md no-underline">
-                {{ playlistDataFiltered.stats.dateFirstAdded.added_at }}
+              <!-- featurings -->
+              <div
+                class="grid grid-cols-2 w-full grow gap-2 p-2 rounded-lg bg-neutral-900"
+              >
+                <p class="col-span-2 pl-2">
+                  <strong class="text-blue-500">Featurings</strong>
+                </p>
+                <!-- nb featurings -->
+                <div class="flex bg-neutral-800 p-2 rounded-md no-underline">
+                  <p>
+                    This playlist contains
+                    <strong class="text-blue-500"
+                      >{{ playlistDataFiltered.stats.numberOfFeaturings
+                      }}</strong
+                    >
+                    featurings
+                  </p>
+                </div>
+
+                <!-- proportion featurings -->
+                <div class="flex bg-neutral-800 p-2 rounded-md no-underline">
+                  <p>
+                    That represents
+                    <strong class="text-blue-500"
+                      >{{ playlistDataFiltered.stats.proportionOfFeaturings
+                      }}</strong
+                    >
+                    of the playlist
+                  </p>
+                </div>
               </div>
 
-              <!-- nb featurings -->
-              <div class="flex bg-neutral-900 p-2 rounded-md no-underline">
-                {{ playlistDataFiltered.stats.numberOfFeaturings }} featurings
-                in this playlist
-              </div>
+              <!-- Time -->
+              <div
+                class="grid grid-cols-2 w-full grow gap-2 p-2 rounded-lg bg-neutral-900"
+              >
+                <p class="col-span-2 pl-2">
+                  <strong class="text-pink-500">Time</strong>
+                </p>
+                <!-- total duration playlist -->
+                <div class="flex bg-neutral-800 p-2 rounded-md no-underline">
+                  <p>
+                    Total duration of the playlist :
+                    <strong class="text-pink-500"
+                      >{{ playlistDataFiltered.stats.totalDuration }}</strong
+                    >
+                  </p>
+                </div>
 
-              <!-- proportion featurings -->
-              <div class="flex bg-neutral-900 p-2 rounded-md no-underline">
-                {{ playlistDataFiltered.stats.proportionOfFeaturings }} of
-                featurings in this playlist
-              </div>
-
-              <!-- total duration playlist -->
-              <div class="flex bg-neutral-900 p-2 rounded-md no-underline">
-                total duration : {{ playlistDataFiltered.stats.totalDuration }}
-              </div>
-
-              <!-- avg duration playlist -->
-              <div class="flex bg-neutral-900 p-2 rounded-md no-underline">
-                avg duration of song : {{
-                playlistDataFiltered.stats.averageTracksDuration }}
+                <!-- avg duration playlist -->
+                <div class="flex bg-neutral-800 p-2 rounded-md no-underline">
+                  <p>
+                    Average duration of song :
+                    <strong class="text-pink-500"
+                      >{{ playlistDataFiltered.stats.averageTracksDuration
+                      }}</strong
+                    >
+                  </p>
+                </div>
               </div>
             </div>
 
