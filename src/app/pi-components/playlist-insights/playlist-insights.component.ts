@@ -43,9 +43,9 @@ interface Track {
 
 interface PlaylistStats {
   totalAlbums: number;
-  albumWithMostTracks: Album;
+  albumWithMostTracks: Album[];
   totalArtists: number;
-  artistWithMostTracks: Artist;
+  artistWithMostTracks: Artist[];
   totalTracks: number;
   dateFirstAdded: Track;
   numberOfFeaturings: number;

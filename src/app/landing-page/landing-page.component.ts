@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent {
-  title = 'SpotifyInsights';
+  constructor(private router: Router) {}
+  navigateToSpotifyInsights() {
+    this.router.navigate(['/spotifyPlaylistInsights']);
+  }
 }

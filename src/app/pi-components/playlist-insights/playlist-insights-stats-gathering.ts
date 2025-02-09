@@ -26,9 +26,9 @@ interface Track {
 
 interface PlaylistStats {
   totalAlbums: number;
-  albumWithMostTracks: Album;
+  albumWithMostTracks: Album[];
   totalArtists: number;
-  artistWithMostTracks: Artist;
+  artistWithMostTracks: Artist[];
   totalTracks: number;
   dateFirstAdded: Track;
   numberOfFeaturings: number;
@@ -46,19 +46,23 @@ export function statsGathering(
   if (!playlistInfo || typeof playlistInfo !== 'object') {
     return {
       totalAlbums: 0,
-      albumWithMostTracks: {
-        albumName: '',
-        artists: [],
-        nbSongsInPlaylist: 0,
-        image: '',
-        albumLink: '',
-      },
+      albumWithMostTracks: [
+        {
+          albumName: '',
+          artists: [],
+          nbSongsInPlaylist: 0,
+          image: '',
+          albumLink: '',
+        },
+      ],
       totalArtists: 0,
-      artistWithMostTracks: {
-        artistName: '',
-        nbSongsInPlaylist: 0,
-        artistLink: '',
-      },
+      artistWithMostTracks: [
+        {
+          artistName: '',
+          nbSongsInPlaylist: 0,
+          artistLink: '',
+        },
+      ],
       totalTracks: 0,
       dateFirstAdded: {
         trackName: '',
@@ -82,18 +86,24 @@ export function statsGathering(
   const totalAlbums = albums?.length || 0;
 
   // OK
+  const maxNbSongsAlbum = Math.max(
+    ...(albums?.map((album) => album.nbSongsInPlaylist) || [0])
+  );
   const albumWithMostTracks =
-    albums?.reduce((prev: any, current: any) =>
-      prev.nbSongsInPlaylist > current.nbSongsInPlaylist ? prev : current
-    ) || {};
+    albums?.filter((album) => album.nbSongsInPlaylist === maxNbSongsAlbum) ||
+    [];
 
   // OK
   const totalArtists = artists?.length || 0;
 
   // OK
-  const artistWithMostTracks = artists?.reduce((prev: any, current: any) =>
-    prev.nbSongsInPlaylist > current.nbSongsInPlaylist ? prev : current
+  const maxNbSongsArtist = Math.max(
+    ...(artists?.map((artist) => artist.nbSongsInPlaylist) || [0])
   );
+  const artistWithMostTracks =
+    artists?.filter(
+      (artist) => artist.nbSongsInPlaylist === maxNbSongsArtist
+    ) || [];
 
   // OK
   const totalTracks = tracks?.length || 0;
@@ -128,7 +138,9 @@ export function statsGathering(
   const averageTracksDurationMS = parseInt(
     (totalDurationMS / totalTracks).toFixed(1)
   );
-  const averageTracksDuration = formatDuration(convertMiliseconds(averageTracksDurationMS));
+  const averageTracksDuration = formatDuration(
+    convertMiliseconds(averageTracksDurationMS)
+  );
 
   return {
     totalAlbums,
@@ -188,9 +200,9 @@ function formatDuration(duration: {
 }
 
 function formatDate(isoString: string): string {
-    const dateObj = new Date(isoString);
-    const monthName = dateObj.toLocaleString("en-US", { month: "long" });
-    const day = dateObj.getDate(); 
-    const year = dateObj.getFullYear();
-    return `${day} ${monthName} ${year}`;
-  }
+  const dateObj = new Date(isoString);
+  const monthName = dateObj.toLocaleString('en-US', { month: 'long' });
+  const day = dateObj.getDate();
+  const year = dateObj.getFullYear();
+  return `${day} ${monthName} ${year}`;
+}

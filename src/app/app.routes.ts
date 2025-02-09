@@ -6,7 +6,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent }, // Default page
-  { path: 'playlistInsights', component: PlaylistInsightsPageComponent },
+  { path: 'spotifyPlaylistInsights', component: PlaylistInsightsPageComponent },
   { path: '**', redirectTo: '' }, // Redirect to default page
   // { path: 'playlistInsights/:playlist_id', component: PlaylistInsightsComponent }, 
   // { path: 'urlPlaylistInsights', component: UrlPlaylistInsightsComponent }, 

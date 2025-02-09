@@ -28,9 +28,9 @@ interface Track {
 
 interface PlaylistStats {
   totalAlbums: number;
-  albumWithMostTracks: Album;
+  albumWithMostTracks: Album[];
   totalArtists: number;
-  artistWithMostTracks: Artist;
+  artistWithMostTracks: Artist[];
   totalTracks: number;
   dateFirstAdded: Track;
   numberOfFeaturings: number;
@@ -80,19 +80,19 @@ export function filterPlaylistInsights(playlistInfo: any): {
       artists: [],
       stats: {
         totalAlbums: 0,
-        albumWithMostTracks: {
+        albumWithMostTracks: [{
           albumName: '',
           artists: [],
           nbSongsInPlaylist: 0,
           image: '',
           albumLink: '',
-        },
+        }],
         totalArtists: 0,
-        artistWithMostTracks: {
+        artistWithMostTracks: [{
           artistName: '',
           nbSongsInPlaylist: 0,
           artistLink: '',
-        },
+        }],
         totalTracks: 0,
         dateFirstAdded: {
           trackName: '',

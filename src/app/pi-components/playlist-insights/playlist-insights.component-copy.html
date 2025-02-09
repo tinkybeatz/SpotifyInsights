@@ -119,10 +119,9 @@
                   <p>
                     This playlist was created on :
                     <strong class="text-red-500 text-lg"
-                      >{{
-                      playlistDataFiltered.stats.dateFirstAdded.added_at
-                      }}
-                    </strong></p>
+                      >{{ playlistDataFiltered.stats.dateFirstAdded.added_at }}
+                    </strong>
+                  </p>
                 </div>
               </div>
 
@@ -177,67 +176,175 @@
                 <!-- album w/ most tracks -->
                 <div class="relative">
                   <p class="pl-2 pb-2">
-                    <strong class="text-yellow-500">Album</strong> that has the
-                    most songs in your playlist
+                    <strong class="text-yellow-500">Album(s)</strong> that has
+                    the most songs in your playlist
                   </p>
-                  <a
-                    href="{{ playlistDataFiltered.stats.albumWithMostTracks.albumLink }}"
-                    target="_blank"
-                    class="flex text-black [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-yellow-500 to-yellow-300 p-2 rounded-md no-underline relative"
-                    [ngClass]="{
+                  <!-- TOP 1 -->
+                  <ng-container
+                    *ngIf="playlistDataFiltered.stats.albumWithMostTracks.length === 1; else multipleAlbums"
+                    ><a
+                      href="{{ playlistDataFiltered.stats.albumWithMostTracks[0].albumLink }}"
+                      target="_blank"
+                      class="flex text-black [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-yellow-500 to-yellow-300 p-2 rounded-md no-underline relative"
+                      [ngClass]="{
                       'text-red-600':
-                        playlistDataFiltered.stats.albumWithMostTracks.albumName ===
+                        playlistDataFiltered.stats.albumWithMostTracks[0].albumName ===
                         'Unknown Album'
                     }"
-                  >
-                    <div class="h-full content-center">
-                      <img
-                        src="{{ playlistDataFiltered.stats.albumWithMostTracks.image }}"
-                        alt="album.image"
-                        class="h-20 w-20 object-contain rounded-[4px]"
-                      />
-                    </div>
-                    <div class="flex-col ml-2 content-center">
-                      <strong class="text-xl">
-                        {{
-                        playlistDataFiltered.stats.albumWithMostTracks.albumName
-                        }}
-                      </strong>
-                      <p>
-                        {{
-                        playlistDataFiltered.stats.albumWithMostTracks.artists
-                        }}
-                      </p>
-                      <p>
-                        This playlist contains
-                        <strong>
+                    >
+                      <div class="h-full content-center">
+                        <img
+                          src="{{ playlistDataFiltered.stats.albumWithMostTracks[0].image }}"
+                          alt="album.image"
+                          class="h-20 w-20 object-contain rounded-[4px]"
+                        />
+                      </div>
+                      <div class="flex-col ml-2 content-center">
+                        <strong class="text-2xl">
                           {{
-                          playlistDataFiltered.stats.albumWithMostTracks.nbSongsInPlaylist
+                          playlistDataFiltered.stats.albumWithMostTracks[0].albumName
                           }}
                         </strong>
-                        songs of this album
-                      </p>
+                        <p>
+                          {{
+                          playlistDataFiltered.stats.albumWithMostTracks[0].artists
+                          }}
+                        </p>
+                        <p class="text-md">
+                          <strong>
+                            {{
+                            playlistDataFiltered.stats.albumWithMostTracks[0].nbSongsInPlaylist
+                            }}
+                          </strong>
+                          tracks
+                        </p>
+                      </div>
+                    </a>
+                    <img
+                      src="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f451.png"
+                      alt="Extra corner image"
+                      class="absolute top-0 right-0 w-12 h-12 transform rotate-[20deg] translate-x-[20%] translate-y-[25%] z-10 pointer-events-none"
+                    />
+                  </ng-container>
+                  <!-- NO TOP 1 -->
+                  <ng-template #multipleAlbums>
+                    <div
+                      class="space-y-2 flex-col h-[90px] overflow-y-scroll rounded-md"
+                    >
+                      <ng-container
+                        *ngFor="let album of playlistDataFiltered.stats.albumWithMostTracks"
+                      >
+                        <a
+                          href="{{ album.albumLink }}"
+                          target="_blank"
+                          class="flex bg-neutral-800 p-2 rounded-md no-underline relative"
+                          [ngClass]="{ 'text-red-600': album.albumName === 'Unknown Album' }"
+                        >
+                          <div class="flex-col ml-2 content-center">
+                            <div class="flex space-x-1">
+                              <strong
+                                class="text-yellow-500 text-sm content-center"
+                              >
+                                {{ album.albumName }}
+                              </strong>
+                              <p class="text-sm content-center">
+                                - {{ album.artists }}
+                              </p>
+                            </div>
+                            <p class="text-sm">
+                              This playlist contains
+                              <strong>{{ album.nbSongsInPlaylist }}</strong>
+                              songs of this album
+                            </p>
+                          </div>
+                        </a>
+                      </ng-container>
                     </div>
-                  </a>
-                  <img
-                    src="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f451.png"
-                    alt="Extra corner image"
-                    class="absolute top-0 right-0 w-12 h-12 transform rotate-[20deg] translate-x-[20%] translate-y-[25%] z-10 pointer-events-none"
-                  />
+                  </ng-template>
                 </div>
 
                 <!-- artist w/ most tracks -->
                 <div class="relative flex flex-col w-full grow">
                   <p class="pl-2 pb-2">
-                    <strong class="text-yellow-500">Artist</strong> that has the
-                    most songs in your playlist
+                    <strong class="text-yellow-500">Artist(s)</strong> that has
+                    the most songs in your playlist
                   </p>
-                  <a
-                    href="{{ playlistDataFiltered.stats.artistWithMostTracks.artistLink == 'Unknown Artist Links' ? '/playlistInsights' : playlistDataFiltered.stats.artistWithMostTracks.artistLink }}"
+                  <!-- TOP 1 -->
+                  <ng-container
+                    *ngIf="playlistDataFiltered.stats.artistWithMostTracks.length === 1; else multipleArtists"
+                    ><a
+                      href="{{ playlistDataFiltered.stats.artistWithMostTracks[0].artistLink }}"
+                      target="_blank"
+                      class="flex h-full justify-center items-center text-black [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-yellow-500 to-yellow-300 p-2 rounded-md no-underline relative"
+                      [ngClass]="{
+                      'text-red-600':
+                        playlistDataFiltered.stats.artistWithMostTracks[0].artistName ===
+                        'Unknown Artist'
+                    }"
+                    >
+                      <div
+                        class="flex flex-col h-full justify-center items-center"
+                      >
+                        <strong class="text-2xl"
+                          >{{
+                          playlistDataFiltered.stats.artistWithMostTracks[0].artistName
+                          }}</strong
+                        >
+                        <p>
+                          This playlist contains
+                          <strong
+                            >{{
+                            playlistDataFiltered.stats.artistWithMostTracks[0].nbSongsInPlaylist
+                            }}</strong
+                          >
+                          songs of this artist
+                        </p>
+                      </div>
+                    </a>
+                    <img
+                      src="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f451.png"
+                      alt="Extra corner image"
+                      class="absolute top-0 right-0 w-12 h-12 transform rotate-[20deg] translate-x-[20%] translate-y-[25%] z-10 pointer-events-none"
+                    />
+                  </ng-container>
+                  <!-- NO TOP 1 -->
+                  <ng-template #multipleArtists>
+                    <div
+                      class="space-y-2 flex-col h-[90px] overflow-y-scroll rounded-md"
+                    >
+                      <ng-container
+                        *ngFor="let artist of playlistDataFiltered.stats.artistWithMostTracks"
+                      >
+                        <a
+                          href="{{ artist.artistLink }}"
+                          target="_blank"
+                          class="flex bg-neutral-800 p-2 rounded-md no-underline relative"
+                          [ngClass]="{ 'text-red-600': artist.artistName === 'Unknown Artist' }"
+                        >
+                          <div class="flex-col ml-2 content-center">
+                            <div class="flex space-x-1">
+                              <strong
+                                class="text-yellow-500 text-sm content-center"
+                              >
+                                {{ artist.artistName }}
+                              </strong>
+                            </div>
+                            <p class="text-sm">
+                              This playlist contains
+                              <strong>{{ artist.nbSongsInPlaylist }}</strong>
+                              songs of this artist
+                            </p>
+                          </div>
+                        </a>
+                      </ng-container>
+                    </div>
+                  </ng-template>
+                  <!-- <a
+                    href="{{ playlistDataFiltered.stats.artistWithMostTracks[0].artistLink == 'Unknown Artist Links' ? '/playlistInsights' : playlistDataFiltered.stats.artistWithMostTracks[0].artistLink }}"
                     target="_blank"
                     class="flex flex-col w-full grow text-black [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-300 p-2 rounded-md no-underline"
                     [ngClass]="{
-                    'text-red-600': playlistDataFiltered.stats.artistWithMostTracks.artistName === 'Unknown Artist'
+                    'text-red-600': playlistDataFiltered.stats.artistWithMostTracks[0].artistName === 'Unknown Artist'
                   }"
                   >
                     <div
@@ -245,14 +352,14 @@
                     >
                       <strong class="text-2xl"
                         >{{
-                        playlistDataFiltered.stats.artistWithMostTracks.artistName
+                        playlistDataFiltered.stats.artistWithMostTracks[0].artistName
                         }}</strong
                       >
                       <p>
                         This playlist contains
                         <strong
                           >{{
-                          playlistDataFiltered.stats.artistWithMostTracks.nbSongsInPlaylist
+                          playlistDataFiltered.stats.artistWithMostTracks[0].nbSongsInPlaylist
                           }}</strong
                         >
                         songs of this artist
@@ -263,7 +370,7 @@
                     src="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f451.png"
                     alt="Extra corner image"
                     class="absolute top-0 right-0 w-12 h-12 transform rotate-[20deg] translate-x-[20%] translate-y-[25%] z-10 pointer-events-none"
-                  />
+                  /> -->
                 </div>
               </div>
 
