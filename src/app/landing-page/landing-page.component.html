@@ -1,57 +1,45 @@
-<div>
-  <div class="gradient-bg">
-    <div class="gradients-container">
-      <div class="g1"></div>
-      <div class="g2"></div>
-      <div class="g3"></div>
-      <div class="g4"></div>
-      <div class="g5"></div>
-    </div>
-  </div>
-
-  <!-- <div class="content">
-    <p class="pre-title">Coming Soon :</p>
-    <p class="title">Spotify Insights</p>
-  </div> -->
-  <div class="content">
-    <div class="flex flex-col h-full w-full">
-      <div class="flex w-full h-1/5 justify-center items-center">
-        <div class="title">Welcome to Playlist Insights</div>
+<div class="flex flex-col bg-neutral-900">
+  <div class="flex flex-1 overflow-hidden">
+    <div class="gradient-bg-landing">
+      <div>
+        <div class="g1-landing"></div>
+        <div class="g2-landing"></div>
+        <div class="g3-landing"></div>
+        <div class="g4-landing"></div>
+        <div class="g5-landing"></div>
+        <div class="g6-landing"></div>
+        <div class="g7-landing"></div>
       </div>
-      <div class="flex w-full h-4/5 pb-14 px-14">
-        <div class="big-box">
-          <div class="flex-col h-full space-y-2 w-full">
-            <div
-              class="flex flex-col w-full h-1/5 justify-center items-center p-4"
-            >
-              <p class="font-semibold text-center text-xl">
-                This website allows you to get stats and insights on your public
-                playlists.
-              </p>
-              <p class="font-semibold text-center text-xl">
-                For now, it only works for Spotify playlists, but I am working
-                on implementing Deezer, Apple Music and SoundCloud playlists.
-              </p>
+      <div class="flex flex-col z-10 w-full bg-black/50">
+        <div class="flex h-[7vh] bg-black/25">
+          <div class="flex cursor-pointer" (click)="changeSection('Home')">
+            <img src="main-logo.svg" alt="ico" class="object-contain w-16 my-3"/>
+            <div class="flex text-white text-center items-center justify-center text-2xl font-semibold">
+              Playlist Insights
             </div>
-            <div
-              class="grid grid-cols-5 w-full h-1/6 bg-neutral-600/50 rounded-lg p-2"
-            >
-              <div class="flex col-span-4 items-center px-4">
-                <p class="font-semibold text-center text-3xl">
-                  Spotify Playlist Insights
-                </p>
-              </div>
-              <div class="flex col-span-1 p-1">
-                <button
-                  class="flex w-full text-white justify-center items-center bg-green-600 rounded-md hover:bg-green-700 active:bg-green-800"
-                  (click)="navigateToSpotifyInsights()"
-                >
-                  <div class="flex items-center">
-                    <p class="">Go</p>
-                  </div>
-                </button>
-              </div>
-            </div>
+          </div>
+        </div>
+        <div class="flex flex-col w-full h-[93vh] justify-center items-center">
+          <p
+            class="flex flex-col text-white font-bold text-6xl w-1/2 text-center"
+          >
+            Ever wanted to have stats
+            <span>of your playlists?</span>
+          </p>
+          <p
+            class="flex text-white font-semibold text-xl italic mt-10 px-2 bg-gradient-to-r from-green-600 to-purple-600 text-center"
+          >
+            This website can do it for you!
+          </p>
+          <div class="flex mt-10 space-x-5">
+            <button class="flex items center rounded-full px-5 py-4 bg-white font-medium text-sm" (click)="goToInsights('deezer')">
+              <img src="deezer-logo.png" class="h-5 pr-2" alt="logo">
+              Deezer Playlists
+            </button>
+            <button class="flex items-center rounded-full px-5 py-4 bg-white font-medium text-sm" (click)="goToInsights('spotify')">
+              <img src="spotify-black-favicon.ico" class="h-5 pr-2" alt="logo">
+              Spotify Playlists
+            </button>
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@
         <div class="flex flex-col h-full p-4">
           <div class="flex items-center mb-4">
             <img
-              class="h-24 object-cover rounded-md"
+              class="h-28 w-28 object-cover rounded-md"
               [src]="playlistDataFiltered.image"
               alt="playlist image"
             />
@@ -105,7 +105,15 @@
           </div>
 
           <!-- Scrollable DIV -->
-          <div class="flex-1 overflow-y-scroll px-4 pb-4" #scrollableDiv>
+          <div
+            class="flex-1 overflow-y-auto 
+            [&::-webkit-scrollbar]:w-2 
+            [&::-webkit-scrollbar-track]:rounded-full 
+            [&::-webkit-scrollbar-track]:bg-neutral-800 
+            [&::-webkit-scrollbar-thumb]:rounded-full 
+            [&::-webkit-scrollbar-thumb]:bg-green-600 px-4 pb-4"
+            #scrollableDiv
+          >
             <!-- STATS -->
 
             <!-- div 1 -->
@@ -174,10 +182,10 @@
                 class="grid grid-cols-2 w-full grow gap-2 p-2 rounded-lg bg-neutral-900"
               >
                 <!-- album w/ most tracks -->
-                <div class="relative">
+                <div class="relative flex flex-col w-full grow">
                   <p class="pl-2 pb-2">
-                    <strong class="text-yellow-500">Album(s)</strong> that has
-                    the most songs in your playlist
+                    <strong class="text-yellow-500">Album(s)</strong> with most
+                    songs in your playlist
                   </p>
                   <!-- TOP 1 -->
                   <ng-container
@@ -185,7 +193,7 @@
                     ><a
                       href="{{ playlistDataFiltered.stats.albumWithMostTracks[0].albumLink }}"
                       target="_blank"
-                      class="flex text-black [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-yellow-500 to-yellow-300 p-2 rounded-md no-underline relative"
+                      class="flex text-black h-full [box-shadow:0_0_0_4px_var(--tw-gradient-stops)] bg-gradient-to-tr from-yellow-300 via-yellow-500 to-yellow-300 p-2 rounded-md no-underline relative"
                       [ngClass]="{
                       'text-red-600':
                         playlistDataFiltered.stats.albumWithMostTracks[0].albumName ===
@@ -200,17 +208,17 @@
                         />
                       </div>
                       <div class="flex-col ml-2 content-center">
-                        <strong class="text-2xl">
+                        <strong class="text-xl">
                           {{
                           playlistDataFiltered.stats.albumWithMostTracks[0].albumName
                           }}
                         </strong>
-                        <p>
+                        <p class="text-sm">
                           {{
                           playlistDataFiltered.stats.albumWithMostTracks[0].artists
                           }}
                         </p>
-                        <p class="text-md">
+                        <p class="text-sm">
                           <strong>
                             {{
                             playlistDataFiltered.stats.albumWithMostTracks[0].nbSongsInPlaylist
@@ -229,7 +237,12 @@
                   <!-- NO TOP 1 -->
                   <ng-template #multipleAlbums>
                     <div
-                      class="space-y-2 flex-col h-[90px] overflow-y-scroll rounded-md"
+                      class="space-y-2 flex flex-col h-[90px] overflow-y-auto 
+                      [&::-webkit-scrollbar]:w-2 
+                      [&::-webkit-scrollbar-track]:rounded-full 
+                      [&::-webkit-scrollbar-track]:bg-neutral-800 
+                      [&::-webkit-scrollbar-thumb]:rounded-full 
+                      [&::-webkit-scrollbar-thumb]:bg-green-600 rounded-md pr-2"
                     >
                       <ng-container
                         *ngFor="let album of playlistDataFiltered.stats.albumWithMostTracks"
@@ -266,8 +279,8 @@
                 <!-- artist w/ most tracks -->
                 <div class="relative flex flex-col w-full grow">
                   <p class="pl-2 pb-2">
-                    <strong class="text-yellow-500">Artist(s)</strong> that has
-                    the most songs in your playlist
+                    <strong class="text-yellow-500">Artist(s)</strong> with most
+                    songs in your playlist
                   </p>
                   <!-- TOP 1 -->
                   <ng-container
@@ -310,7 +323,12 @@
                   <!-- NO TOP 1 -->
                   <ng-template #multipleArtists>
                     <div
-                      class="space-y-2 flex-col h-[90px] overflow-y-scroll rounded-md"
+                      class="space-y-2 flex flex-col h-[100px] overflow-y-auto 
+                      [&::-webkit-scrollbar]:w-2 
+                      [&::-webkit-scrollbar-track]:rounded-full 
+                      [&::-webkit-scrollbar-track]:bg-neutral-800 
+                      [&::-webkit-scrollbar-thumb]:rounded-full 
+                      [&::-webkit-scrollbar-thumb]:bg-green-600 rounded-md pr-2"
                     >
                       <ng-container
                         *ngFor="let artist of playlistDataFiltered.stats.artistWithMostTracks"

@@ -1,4 +1,4 @@
-import { statsGathering } from './playlist-insights-stats-gathering';
+import { statsGathering } from './spotify-playlist-insights-stats-gathering';
 
 interface Album {
   albumName: string;

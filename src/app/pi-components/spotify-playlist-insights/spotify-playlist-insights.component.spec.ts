@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlaylistInsightsComponent } from './playlist-insights.component';
+import { PlaylistInsightsComponent } from './spotify-playlist-insights.component';
 
 describe('PlaylistInsightsComponent', () => {
   let component: PlaylistInsightsComponent;

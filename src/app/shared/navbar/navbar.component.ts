@@ -6,13 +6,16 @@ import { Location } from '@angular/common';
   selector: 'app-navbar',
   imports: [],
   templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
   constructor(private router: Router, private location: Location) {}
   languageNav: string = navigator.language;
   language: string = 'English';
+  page: string = 'Home';
 
   navigateToHome() {
+    this.page = 'Home';
     this.router.navigate(['/']);
   }
 
@@ -26,5 +29,9 @@ export class NavbarComponent {
 
   translate() {
     alert('coming soon');
+  }
+
+  gotToPlaylist(data: string) {
+    this.router.navigate(['/playlistInsights', data]);
   }
 }

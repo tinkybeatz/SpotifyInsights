@@ -1,15 +1,17 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-url-playlist-insights',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './url-playlist-insights.component.html',
 })
 export class UrlPlaylistInsightsComponent {
-  constructor(private router: Router) {}
+  constructor() {}
 
   @Output() playlistSelected = new EventEmitter<string>();
+  @Input() playlistType: string | null = null;
 
   ngOnInit(): void {}
 

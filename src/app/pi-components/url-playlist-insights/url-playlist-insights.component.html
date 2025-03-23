@@ -10,7 +10,11 @@
       />
       <button
         type="submit"
-        class="bg-green-600 w-[80px] text-white font-sans rounded-md hover:bg-green-700 active:ring ring-white"
+        [ngClass]="{
+          'bg-green-600 hover:bg-green-700': playlistType == 'spotify',
+          'bg-purple-600 hover:bg-purple-700': playlistType == 'deezer',
+        }"
+        class=" w-[80px] text-white font-sans rounded-md active:ring ring-white"
         (click)="submit()"
       >
         Submit

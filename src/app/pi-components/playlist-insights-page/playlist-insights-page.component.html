@@ -12,35 +12,40 @@
 <div class="flex flex-col bg-neutral-900 h-screen">
   <div class="grid grid-cols-3 gap-4 mx-10">
     <div class="flex col-span-1 small-title justify-end">
-      <button class="flex" (click)="resetId()">
-        <!-- <img src="public/favicon.ico" alt="logo"> -->
-        Spotify Playlist Insights
+      <button *ngIf="playlistType == 'spotify'" class="flex" (click)="resetId()">
+        <img src="spotify-white-favicon.ico" class="h-8 pr-3" alt="logo">
+        <p>Spotify Playlist Insights</p>
+      </button>
+      <button *ngIf="playlistType == 'deezer'" class="flex" (click)="resetId()">
+        <img src="deezer-logo.png" class="h-8 pr-3" alt="logo">
+        <p>Deezer Playlist Insights</p>
       </button>
     </div>
-    <div class="flex col-span-2 items-center">
+    <!-- TEMPORARY -->
+    <div *ngIf="playlistType == 'spotify'" class="flex col-span-2 items-center">
       <app-url-playlist-insights
-        (playlistSelected)="onPlaylistSelected($event)"
+        (playlistSelected)="onPlaylistSelected($event)" [playlistType]="playlistType"
       ></app-url-playlist-insights>
     </div>
   </div>
   <app-navbar></app-navbar>
   <div class="flex mb-4 mx-4 flex-1 overflow-hidden shadow-inner">
-    <div class="gradient-bg">
+    <div *ngIf="playlistType == 'spotify'" class="gradient-bg-spotify">
       <div>
-        <div class="g1"></div>
-        <div class="g2"></div>
-        <div class="g3"></div>
-        <div class="g4"></div>
-        <div class="g5"></div>
+        <div class="g1-spotify"></div>
+        <div class="g2-spotify"></div>
+        <div class="g3-spotify"></div>
+        <div class="g4-spotify"></div>
+        <div class="g5-spotify"></div>
       </div>
       <div
         *ngIf="playlistId"
         class="flex flex-col z-10 w-full h-full bg-black/25 overflow-hidden"
       >
         <div class="overflow-y-auto h-full">
-          <app-playlist-insights
+          <app-spotify-playlist-insights
             [playlistId]="playlistId"
-          ></app-playlist-insights>
+          ></app-spotify-playlist-insights>
         </div>
       </div>
       <div
@@ -56,6 +61,34 @@
             here.
           </p>
         </div>
+      </div>
+    </div>
+
+    <div *ngIf="playlistType == 'deezer'" class="gradient-bg-deezer">
+      <div>
+        <div class="g1-deezer"></div>
+        <div class="g2-deezer"></div>
+        <div class="g3-deezer"></div>
+        <div class="g4-deezer"></div>
+        <div class="g5-deezer"></div>
+      </div>
+      <div
+        *ngIf="playlistId"
+        class="flex flex-col z-10 w-full h-full bg-black/25 overflow-hidden"
+      >
+        <div class="overflow-y-auto h-full">
+          <app-deezer-playlist-insights
+            [playlistId]="playlistId"
+          ></app-deezer-playlist-insights>
+        </div>
+      </div>
+      <div
+        *ngIf="!playlistId"
+        class="flex flex-col z-10 p-4 w-full h-full bg-black/25"
+      >
+        <p class="text-white text-[2rem] font-medium leading-none m-4 mb-8">
+          This page will be available soon.
+        </p>
       </div>
     </div>
   </div>

@@ -9,8 +9,8 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 import { CommonModule } from '@angular/common';
-import { filterPlaylistInsights } from './playlist-insights-filtering';
-import { sortData } from './playlist-insights-sorting';
+import { filterPlaylistInsights } from './spotify-playlist-insights-filtering';
+import { sortData } from './spotify-playlist-insights-sorting';
 
 import { LoadingAnimationComponent } from '../../shared/loading-animation/loading-animation.component';
 import { SortingDropdownButtonComponent } from '../../shared/sorting-dropdown-button/sorting-dropdown-button.component';
@@ -55,12 +55,12 @@ interface PlaylistStats {
 }
 
 @Component({
-  selector: 'app-playlist-insights',
+  selector: 'app-spotify-playlist-insights',
   standalone: true,
-  templateUrl: './playlist-insights.component-copy.html',
+  templateUrl: './spotify-playlist-insights.component-copy.html',
   imports: [CommonModule, LoadingAnimationComponent, SortingDropdownButtonComponent], // Add the CommonModule to the imports array
 })
-export class PlaylistInsightsComponent implements OnInit {
+export class SpotifyPlaylistInsightsComponent implements OnInit {
   @Input() playlistId: string | null = null;
   @ViewChild('scrollableDiv') scrollableDiv!: ElementRef;
   playlistDataFiltered:
