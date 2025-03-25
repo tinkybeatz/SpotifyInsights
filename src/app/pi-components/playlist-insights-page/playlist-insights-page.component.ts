@@ -5,6 +5,8 @@ import { UrlPlaylistInsightsComponent } from '../url-playlist-insights/url-playl
 import { SpotifyPlaylistInsightsComponent } from '../spotify-playlist-insights/spotify-playlist-insights.component';
 import { CommonModule } from '@angular/common';
 import { DeezerPlaylistInsightsComponent } from "../deezer-playlist-insights/deezer-playlist-insights.component";
+import { AppleMusicPlaylistInsightsComponent } from "../apple-music-playlist-insights/apple-music-playlist-insights.component";
+import { SoundcloudPlaylistInsightsComponent } from "../soundcloud-playlist-insights/soundcloud-playlist-insights.component";
 
 @Component({
   selector: 'app-playlist-insights-page',
@@ -14,7 +16,9 @@ import { DeezerPlaylistInsightsComponent } from "../deezer-playlist-insights/dee
     NavbarComponent,
     UrlPlaylistInsightsComponent,
     SpotifyPlaylistInsightsComponent,
-    DeezerPlaylistInsightsComponent
+    DeezerPlaylistInsightsComponent,
+    AppleMusicPlaylistInsightsComponent,
+    SoundcloudPlaylistInsightsComponent
 ],
   templateUrl: './playlist-insights-page.component.html',
   styleUrls: ['./playlist-insights-page.component.scss'],
@@ -30,7 +34,7 @@ export class PlaylistInsightsPageComponent {
       const newType = params.get('page') || '';
       if (this.playlistType !== newType) {
         this.playlistType = newType;
-        this.resetId(); // facultatif selon ton besoin
+        this.resetId();
       }
     });
   }

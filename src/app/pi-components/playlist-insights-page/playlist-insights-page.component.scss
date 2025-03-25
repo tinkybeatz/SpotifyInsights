@@ -235,3 +235,241 @@
     opacity: 1;
   }
 }
+
+.gradient-bg-appleMusic {
+  display: flex;
+  position: relative;
+  height: auto;
+  border-radius: 10px;
+  width: 100%;
+  background: linear-gradient(40deg, var(--color-bg1-appleMusic), var(--color-bg2-appleMusic));
+
+  .g1-appleMusic {
+    z-index: 0;
+    position: absolute;
+    background: radial-gradient(
+        circle at center,
+        rgba(var(--color1-appleMusic), 0.8) 0,
+        rgba(var(--color1-appleMusic), 0) 40%
+      )
+      no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: center center;
+    animation: moveVertical 30s ease infinite;
+
+    opacity: 1;
+  }
+
+  .g2-appleMusic {
+    z-index: 0;
+    position: absolute;
+    background: radial-gradient(
+        circle at center,
+        rgba(var(--color2-appleMusic), 0.8) 0,
+        rgba(var(--color2-appleMusic), 0) 40%
+      )
+      no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: calc(50% - 800px);
+    animation: moveInCircle 20s reverse infinite;
+
+    opacity: 1;
+  }
+
+  .g3-appleMusic {
+    z-index: 0;
+    position: absolute;
+    background: radial-gradient(
+        circle at center,
+        rgba(var(--color3-appleMusic), 0.8) 0,
+        rgba(var(--color3-appleMusic), 0) 40%
+      )
+      no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2 + 200px);
+    left: calc(50% - var(--circle-size) / 2 - 500px);
+
+    transform-origin: calc(50% + 800px);
+    animation: moveInCircle 40s linear infinite;
+
+    opacity: 1;
+  }
+
+  .g4-appleMusic {
+    z-index: 0;
+    position: absolute;
+    background: radial-gradient(
+        circle at center,
+        rgba(var(--color4-appleMusic), 0.8) 0,
+        rgba(var(--color4-appleMusic), 0) 40%
+      )
+      no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: calc(50% - 800px);
+    animation: moveHorizontal 40s ease infinite;
+
+    opacity: 0.7;
+  }
+
+  .g5-appleMusic {
+    z-index: 0;
+    position: absolute;
+    background: radial-gradient(
+        circle at center,
+        rgba(var(--color5-appleMusic), 0.8) 0,
+        rgba(var(--color5-appleMusic), 0) 40%
+      )
+      no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: calc(var(--circle-size) * 2);
+    height: calc(var(--circle-size) * 2);
+    top: calc(50% - var(--circle-size));
+    left: calc(50% - var(--circle-size));
+
+    transform-origin: calc(50% - 800px) calc(50% + 200px);
+    animation: moveInCircle 20s ease infinite;
+
+    opacity: 1;
+  }
+}
+
+.gradient-bg-soundcloud {
+  display: flex;
+  position: relative;
+  height: auto;
+  border-radius: 10px;
+  width: 100%;
+  background: linear-gradient(40deg, var(--color-bg1-soundcloud), var(--color-bg2-soundcloud));
+
+  .g1-soundcloud {
+    z-index: 0;
+    position: absolute;
+    background: radial-gradient(
+        circle at center,
+        rgba(var(--color1-soundcloud), 0.8) 0,
+        rgba(var(--color1-soundcloud), 0) 40%
+      )
+      no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: center center;
+    animation: moveVertical 30s ease infinite;
+
+    opacity: 1;
+  }
+
+  .g2-soundcloud {
+    z-index: 0;
+    position: absolute;
+    background: radial-gradient(
+        circle at center,
+        rgba(var(--color2-soundcloud), 0.8) 0,
+        rgba(var(--color2-soundcloud), 0) 40%
+      )
+      no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: calc(50% - 800px);
+    animation: moveInCircle 20s reverse infinite;
+
+    opacity: 1;
+  }
+
+  .g3-soundcloud {
+    z-index: 0;
+    position: absolute;
+    background: radial-gradient(
+        circle at center,
+        rgba(var(--color3-soundcloud), 0.8) 0,
+        rgba(var(--color3-soundcloud), 0) 40%
+      )
+      no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2 + 200px);
+    left: calc(50% - var(--circle-size) / 2 - 500px);
+
+    transform-origin: calc(50% + 800px);
+    animation: moveInCircle 40s linear infinite;
+
+    opacity: 1;
+  }
+
+  .g4-soundcloud {
+    z-index: 0;
+    position: absolute;
+    background: radial-gradient(
+        circle at center,
+        rgba(var(--color4-soundcloud), 0.8) 0,
+        rgba(var(--color4-soundcloud), 0) 40%
+      )
+      no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: calc(50% - 800px);
+    animation: moveHorizontal 40s ease infinite;
+
+    opacity: 0.7;
+  }
+
+  .g5-soundcloud {
+    z-index: 0;
+    position: absolute;
+    background: radial-gradient(
+        circle at center,
+        rgba(var(--color5-soundcloud), 0.8) 0,
+        rgba(var(--color5-soundcloud), 0) 40%
+      )
+      no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: calc(var(--circle-size) * 2);
+    height: calc(var(--circle-size) * 2);
+    top: calc(50% - var(--circle-size));
+    left: calc(50% - var(--circle-size));
+
+    transform-origin: calc(50% - 800px) calc(50% + 200px);
+    animation: moveInCircle 20s ease infinite;
+
+    opacity: 1;
+  }
+}

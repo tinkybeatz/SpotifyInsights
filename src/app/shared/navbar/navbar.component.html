@@ -2,7 +2,7 @@
   class="flex h-[50px] w-auto bg-neutral-900 text-white rounded-lg z-20 fixed bottom-8 left-1/2 transform -translate-x-1/2 gap-1.5 p-1.5 shadow-md"
 >
   <button
-    class="flex w-28 text-white justify-center items-center bg-gradient-to-r from-green-600 to-purple-600 rounded-md hover:bg-green-700 active:bg-green-800"
+    class="flex w-32 text-white justify-center items-center bg-gradient-to-r from-green-600 via-[#f50] to-purple-600 rounded-md hover:ring-inset hover:ring-2 hover:ring-white"
     (click)="navigateToHome()"
   >
     <div class="flex gap-1 items-center">
@@ -34,7 +34,7 @@
   <div class="relative group">
     <!-- Bouton principal -->
     <button
-      class="flex w-28 h-full text-white justify-center items-center rounded-t-md rounded-b-md bg-neutral-600 active:bg-neutral-800 group-hover:rounded-t-none"
+      class="flex w-32 h-full text-white justify-center items-center rounded-t-md rounded-b-md bg-neutral-600 active:bg-neutral-800 group-hover:rounded-t-none"
     >
       <div class="flex gap-1 items-center">
         <p>Playlists</p>
@@ -47,12 +47,14 @@
     >
       <button (click)="gotToPlaylist('spotify')" class="px-4 py-2 hover:bg-neutral-700 w-full rounded-t-md text-center underline decoration-2 decoration-green-600">Spotify</button>
       <button (click)="gotToPlaylist('deezer')" class="px-4 py-2 hover:bg-neutral-700 w-full text-center underline decoration-2 decoration-purple-600">Deezer</button>
+      <button (click)="gotToPlaylist('appleMusic')" class="px-4 py-2 hover:bg-neutral-700 w-full text-center underline decoration-2 decoration-[#fa586a]">Apple Music</button>
+      <button (click)="gotToPlaylist('soundcloud')" class="px-4 py-2 hover:bg-neutral-700 w-full text-center underline decoration-2 decoration-[#f50]">SoundCloud</button>
     </div>
   </div>
   
   <div class="w-[2px] h-full bg-neutral-500 opacity-50"></div>
   <button
-    class="flex w-20 text-white justify-center items-center bg-neutral-600 hover:bg-neutral-700 active:bg-neutral-800 rounded-md"
+    class="flex w-20 text-white justify-center items-center bg-neutral-600 hover:bg-neutral-700 active:bg-neutral-800 rounded-md hover:ring-inset hover:ring-2 hover:ring-white"
     (click)="translate()"
   >
     <img src="language-logo-white.svg" alt="world" height="20" width="20" class="mr-2"/>EN

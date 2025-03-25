@@ -11,7 +11,7 @@
         <div class="g7-landing"></div>
       </div>
       <div class="flex flex-col z-10 w-full bg-black/50">
-        <div class="flex h-[7vh] bg-black/25">
+        <div class="flex h-[6vh] fixed w-full bg-black/55">
           <div class="flex cursor-pointer" (click)="changeSection('Home')">
             <img src="main-logo.svg" alt="ico" class="object-contain w-16 my-3"/>
             <div class="flex text-white text-center items-center justify-center text-2xl font-semibold">
@@ -19,29 +19,47 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col w-full h-[93vh] justify-center items-center">
+        <div class="flex flex-col w-full h-[100vh] justify-center items-center">
           <p
-            class="flex flex-col text-white font-bold text-6xl w-1/2 text-center"
+            class="flex flex-col text-white font-bold text-7xl w-1/2 text-center"
           >
             Ever wanted to have stats
             <span>of your playlists?</span>
           </p>
           <p
-            class="flex text-white font-semibold text-xl italic mt-10 px-2 bg-gradient-to-r from-green-600 to-purple-600 text-center"
+            class="flex text-white font-semibold text-2xl italic mt-10 px-2 bg-gradient-to-r from-green-600 via-[#f50] to-purple-600 text-center"
           >
             This website can do it for you!
           </p>
           <div class="flex mt-10 space-x-5">
-            <button class="flex items center rounded-full px-5 py-4 bg-white font-medium text-sm" (click)="goToInsights('deezer')">
-              <img src="deezer-logo.png" class="h-5 pr-2" alt="logo">
+            <button class="flex items center content-center rounded-full px-5 py-4 bg-white font-medium text-sm
+            hover:ring-4
+            hover:ring-purple-600" (click)="goToInsights('deezer')">
+              <img src="deezer-logo-white.png" class="h-5 pr-2" alt="logo">
               Deezer Playlists
             </button>
-            <button class="flex items-center rounded-full px-5 py-4 bg-white font-medium text-sm" (click)="goToInsights('spotify')">
+            <button class="flex items-center content-center rounded-full px-5 py-4 bg-white font-medium text-sm
+            hover:ring-4
+            hover:ring-green-600" (click)="goToInsights('spotify')">
               <img src="spotify-black-favicon.ico" class="h-5 pr-2" alt="logo">
               Spotify Playlists
             </button>
+            <button class="flex items-center content-center rounded-full px-5 py-4 bg-white font-medium text-sm
+            hover:ring-4
+            hover:ring-[#fa586a]" (click)="goToInsights('appleMusic')">
+              <img src="apple-logo.svg" class="h-5 pr-2 mb-[2px]" alt="logo">
+              Apple Music Playlists
+            </button><button class="flex items-center content-center rounded-full px-5 py-4 bg-white font-medium text-sm
+            hover:ring-4
+            hover:ring-[#f50]" (click)="goToInsights('soundcloud')">
+              <img src="soundcloud-logo.png" class="h-5 pr-2 mb-[2px]" alt="logo">
+              Soundcloud Playlists
+            </button>
           </div>
         </div>
+        <!-- <div class="flex flex-col w-full h-[93vh] justify-center items-center">
+          test
+        </div> -->
       </div>
     </div>
   </div>

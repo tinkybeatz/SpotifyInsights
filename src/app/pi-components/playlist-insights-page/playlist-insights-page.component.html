@@ -12,19 +12,40 @@
 <div class="flex flex-col bg-neutral-900 h-screen">
   <div class="grid grid-cols-3 gap-4 mx-10">
     <div class="flex col-span-1 small-title justify-end">
-      <button *ngIf="playlistType == 'spotify'" class="flex" (click)="resetId()">
-        <img src="spotify-white-favicon.ico" class="h-8 pr-3" alt="logo">
+      <button
+        *ngIf="playlistType == 'spotify'"
+        class="flex"
+        (click)="resetId()"
+      >
+        <img src="spotify-logo-color.png" class="h-8 pr-3" alt="logo" />
         <p>Spotify Playlist Insights</p>
       </button>
       <button *ngIf="playlistType == 'deezer'" class="flex" (click)="resetId()">
-        <img src="deezer-logo.png" class="h-8 pr-3" alt="logo">
+        <img src="deezer-logo.png" class="h-8 pr-3" alt="logo" />
         <p>Deezer Playlist Insights</p>
+      </button>
+      <button
+        *ngIf="playlistType == 'appleMusic'"
+        class="flex"
+        (click)="resetId()"
+      >
+        <img src="apple-music-logo-color.png" class="h-7 pr-3" alt="logo" />
+        <p>Apple Music Playlist Insights</p>
+      </button>
+      <button
+        *ngIf="playlistType == 'soundcloud'"
+        class="flex items-center"
+        (click)="resetId()"
+      >
+        <img src="soundcloud-logo-color.png" class="h-8 pr-3" alt="logo" />
+        <p>SoundCloud Playlist Insights</p>
       </button>
     </div>
     <!-- TEMPORARY -->
     <div *ngIf="playlistType == 'spotify'" class="flex col-span-2 items-center">
       <app-url-playlist-insights
-        (playlistSelected)="onPlaylistSelected($event)" [playlistType]="playlistType"
+        (playlistSelected)="onPlaylistSelected($event)"
+        [playlistType]="playlistType"
       ></app-url-playlist-insights>
     </div>
   </div>
@@ -57,8 +78,8 @@
         </p>
         <div class="flex bg-neutral-900/50 rounded-lg p-4 w-full">
           <p class="text-white text-lg leading-none">
-            Please insert the URL link of the Spotify playlist you wish to analyse up
-            here.
+            Please insert the URL link of the Spotify playlist you wish to
+            analyse up here.
           </p>
         </div>
       </div>
@@ -80,6 +101,61 @@
           <app-deezer-playlist-insights
             [playlistId]="playlistId"
           ></app-deezer-playlist-insights>
+        </div>
+      </div>
+      <div
+        *ngIf="!playlistId"
+        class="flex flex-col z-10 p-4 w-full h-full bg-black/25"
+      >
+        <p class="text-white text-[2rem] font-medium leading-none m-4 mb-8">
+          This page will be available soon.
+        </p>
+      </div>
+    </div>
+    <div *ngIf="playlistType == 'appleMusic'" class="gradient-bg-appleMusic">
+      <div>
+        <div class="g1-appleMusic"></div>
+        <div class="g2-appleMusic"></div>
+        <div class="g3-appleMusic"></div>
+        <div class="g4-appleMusic"></div>
+        <div class="g5-appleMusic"></div>
+      </div>
+      <div
+        *ngIf="playlistId"
+        class="flex flex-col z-10 w-full h-full bg-black/25 overflow-hidden"
+      >
+        <div class="overflow-y-auto h-full">
+          <app-apple-music-playlist-insights
+            [playlistId]="playlistId"
+          ></app-apple-music-playlist-insights>
+        </div>
+      </div>
+      <div
+        *ngIf="!playlistId"
+        class="flex flex-col z-10 p-4 w-full h-full bg-black/25"
+      >
+        <p class="text-white text-[2rem] font-medium leading-none m-4 mb-8">
+          This page will be available soon.
+        </p>
+      </div>
+    </div>
+
+    <div *ngIf="playlistType == 'soundcloud'" class="gradient-bg-soundcloud">
+      <div>
+        <div class="g1-soundcloud"></div>
+        <div class="g2-soundcloud"></div>
+        <div class="g3-soundcloud"></div>
+        <div class="g4-soundcloud"></div>
+        <div class="g5-soundcloud"></div>
+      </div>
+      <div
+        *ngIf="playlistId"
+        class="flex flex-col z-10 w-full h-full bg-black/25 overflow-hidden"
+      >
+        <div class="overflow-y-auto h-full">
+          <app-soundcloud-playlist-insights
+            [playlistId]="playlistId"
+          ></app-soundcloud-playlist-insights>
         </div>
       </div>
       <div
