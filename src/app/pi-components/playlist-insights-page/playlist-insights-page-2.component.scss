@@ -1,18 +1,18 @@
-.gradient-bg-spotify {
+.gradient-bg-appleMusic {
   display: flex;
   position: relative;
   height: auto;
   border-radius: 10px;
   width: 100%;
-  background: linear-gradient(40deg, var(--color-bg1-spotify), var(--color-bg2-spotify));
+  background: linear-gradient(40deg, var(--color-bg1-appleMusic), var(--color-bg2-appleMusic));
 
-  .g1-spotify {
+  .g1-appleMusic {
     z-index: 0;
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color1-spotify), 0.8) 0,
-        rgba(var(--color1-spotify), 0) 40%
+        rgba(var(--color1-appleMusic), 0.8) 0,
+        rgba(var(--color1-appleMusic), 0) 40%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -28,13 +28,13 @@
     opacity: 1;
   }
 
-  .g2-spotify {
+  .g2-appleMusic {
     z-index: 0;
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color2-spotify), 0.8) 0,
-        rgba(var(--color2-spotify), 0) 40%
+        rgba(var(--color2-appleMusic), 0.8) 0,
+        rgba(var(--color2-appleMusic), 0) 40%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -50,13 +50,13 @@
     opacity: 1;
   }
 
-  .g3-spotify {
+  .g3-appleMusic {
     z-index: 0;
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color3-spotify), 0.8) 0,
-        rgba(var(--color3-spotify), 0) 40%
+        rgba(var(--color3-appleMusic), 0.8) 0,
+        rgba(var(--color3-appleMusic), 0) 40%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -72,13 +72,13 @@
     opacity: 1;
   }
 
-  .g4-spotify {
+  .g4-appleMusic {
     z-index: 0;
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color4-spotify), 0.8) 0,
-        rgba(var(--color4-spotify), 0) 40%
+        rgba(var(--color4-appleMusic), 0.8) 0,
+        rgba(var(--color4-appleMusic), 0) 40%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -94,13 +94,13 @@
     opacity: 0.7;
   }
 
-  .g5-spotify {
+  .g5-appleMusic {
     z-index: 0;
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color5-spotify), 0.8) 0,
-        rgba(var(--color5-spotify), 0) 40%
+        rgba(var(--color5-appleMusic), 0.8) 0,
+        rgba(var(--color5-appleMusic), 0) 40%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -117,21 +117,21 @@
   }
 }
 
-.gradient-bg-deezer {
+.gradient-bg-soundcloud {
   display: flex;
   position: relative;
   height: auto;
   border-radius: 10px;
   width: 100%;
-  background: linear-gradient(40deg, var(--color-bg1-deezer), var(--color-bg2-deezer));
+  background: linear-gradient(40deg, var(--color-bg1-soundcloud), var(--color-bg2-soundcloud));
 
-  .g1-deezer {
+  .g1-soundcloud {
     z-index: 0;
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color1-deezer), 0.8) 0,
-        rgba(var(--color1-deezer), 0) 40%
+        rgba(var(--color1-soundcloud), 0.8) 0,
+        rgba(var(--color1-soundcloud), 0) 40%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -147,13 +147,13 @@
     opacity: 1;
   }
 
-  .g2-deezer {
+  .g2-soundcloud {
     z-index: 0;
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color2-deezer), 0.8) 0,
-        rgba(var(--color2-deezer), 0) 40%
+        rgba(var(--color2-soundcloud), 0.8) 0,
+        rgba(var(--color2-soundcloud), 0) 40%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -169,13 +169,13 @@
     opacity: 1;
   }
 
-  .g3-deezer {
+  .g3-soundcloud {
     z-index: 0;
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color3-deezer), 0.8) 0,
-        rgba(var(--color3-deezer), 0) 40%
+        rgba(var(--color3-soundcloud), 0.8) 0,
+        rgba(var(--color3-soundcloud), 0) 40%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -191,13 +191,13 @@
     opacity: 1;
   }
 
-  .g4-deezer {
+  .g4-soundcloud {
     z-index: 0;
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color4-deezer), 0.8) 0,
-        rgba(var(--color4-deezer), 0) 40%
+        rgba(var(--color4-soundcloud), 0.8) 0,
+        rgba(var(--color4-soundcloud), 0) 40%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -213,13 +213,13 @@
     opacity: 0.7;
   }
 
-  .g5-deezer {
+  .g5-soundcloud {
     z-index: 0;
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color5-deezer), 0.8) 0,
-        rgba(var(--color5-deezer), 0) 40%
+        rgba(var(--color5-soundcloud), 0.8) 0,
+        rgba(var(--color5-soundcloud), 0) 40%
       )
       no-repeat;
     mix-blend-mode: var(--blending);

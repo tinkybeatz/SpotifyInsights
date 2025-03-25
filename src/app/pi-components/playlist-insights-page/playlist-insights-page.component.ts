@@ -21,7 +21,7 @@ import { SoundcloudPlaylistInsightsComponent } from "../soundcloud-playlist-insi
     SoundcloudPlaylistInsightsComponent
 ],
   templateUrl: './playlist-insights-page.component.html',
-  styleUrls: ['./playlist-insights-page.component.scss'],
+  styleUrls: ['./playlist-insights-page.component.scss', './playlist-insights-page-2.component.scss'],
 })
 export class PlaylistInsightsPageComponent {
   playlistId: string | null = null;
