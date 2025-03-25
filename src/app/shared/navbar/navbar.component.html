@@ -40,24 +40,50 @@
         <p>Playlists</p>
       </div>
     </button>
-  
+
     <!-- Dropdown vers le haut -->
     <div
       class="absolute hidden group-hover:flex flex-col bg-neutral-600 text-white bottom-full z-50 w-full rounded-t-md items-center justify-center border-b border-neutral-700"
     >
-      <button (click)="gotToPlaylist('spotify')" class="px-4 py-2 hover:bg-neutral-700 w-full rounded-t-md text-center underline decoration-2 decoration-green-600">Spotify</button>
-      <button (click)="gotToPlaylist('deezer')" class="px-4 py-2 hover:bg-neutral-700 w-full text-center underline decoration-2 decoration-purple-600">Deezer</button>
-      <button (click)="gotToPlaylist('appleMusic')" class="px-4 py-2 hover:bg-neutral-700 w-full text-center underline decoration-2 decoration-[#fa586a]">Apple Music</button>
-      <button (click)="gotToPlaylist('soundcloud')" class="px-4 py-2 hover:bg-neutral-700 w-full text-center underline decoration-2 decoration-[#f50]">SoundCloud</button>
+      <button
+        (click)="gotToPlaylist('deezer')"
+        class="px-4 py-2 hover:bg-neutral-700 w-full text-center underline decoration-2 decoration-purple-600"
+      >
+        Deezer
+      </button>
+      <button
+        (click)="gotToPlaylist('spotify')"
+        class="px-4 py-2 hover:bg-neutral-700 w-full rounded-t-md text-center underline decoration-2 decoration-green-600"
+      >
+        Spotify
+      </button>
+      <button
+        (click)="gotToPlaylist('appleMusic')"
+        class="px-4 py-2 hover:bg-neutral-700 w-full text-center underline decoration-2 decoration-[#fa586a]"
+      >
+        Apple Music
+      </button>
+      <button
+        (click)="gotToPlaylist('soundcloud')"
+        class="px-4 py-2 hover:bg-neutral-700 w-full text-center underline decoration-2 decoration-[#f50]"
+      >
+        SoundCloud
+      </button>
     </div>
   </div>
-  
+
   <div class="w-[2px] h-full bg-neutral-500 opacity-50"></div>
   <button
     class="flex w-20 text-white justify-center items-center bg-neutral-600 hover:bg-neutral-700 active:bg-neutral-800 rounded-md hover:ring-inset hover:ring-2 hover:ring-white"
     (click)="translate()"
   >
-    <img src="language-logo-white.svg" alt="world" height="20" width="20" class="mr-2"/>EN
+    <img
+      src="language-logo-white.svg"
+      alt="world"
+      height="20"
+      width="20"
+      class="mr-2"
+    />EN
   </button>
 </div>
 
