@@ -1,6 +1,6 @@
 <style>
   .small-title {
-    font-size: 2rem;
+    font-size: 28px;
     font-weight: 500;
     margin: 20px 0px 20px 0px;
     box-decoration-break: slice;
@@ -14,27 +14,31 @@
     <div class="flex col-span-1 small-title justify-end">
       <button
         *ngIf="playlistType == 'spotify'"
-        class="flex"
+        class="flex items-center h-8"
         (click)="resetId()"
       >
         <img src="spotify-logo-color.png" class="h-8 pr-3" alt="logo" />
         <p>Spotify Playlist Insights</p>
       </button>
-      <button *ngIf="playlistType == 'deezer'" class="flex" (click)="resetId()">
+      <button
+        *ngIf="playlistType == 'deezer'"
+        class="flex items-center h-8"
+        (click)="resetId()"
+      >
         <img src="deezer-logo.png" class="h-8 pr-3" alt="logo" />
         <p>Deezer Playlist Insights</p>
       </button>
       <button
         *ngIf="playlistType == 'appleMusic'"
-        class="flex"
+        class="flex items-center h-8"
         (click)="resetId()"
       >
-        <img src="apple-music-logo-color.png" class="h-7 pr-3" alt="logo" />
+        <img src="apple-music-logo-color.png" class="h-6 pr-3" alt="logo" />
         <p>Apple Music Playlist Insights</p>
       </button>
       <button
         *ngIf="playlistType == 'soundcloud'"
-        class="flex items-center"
+        class="flex items-center h-8"
         (click)="resetId()"
       >
         <img src="soundcloud-logo-color.png" class="h-8 pr-3" alt="logo" />
