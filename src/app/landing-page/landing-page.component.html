@@ -11,15 +11,29 @@
         <div class="g7-landing"></div>
       </div>
       <div class="flex flex-col z-10 w-full bg-black/50">
-        <!-- <div class="flex h-[6vh] fixed w-full bg-black/55">
-          <div class="flex cursor-pointer" (click)="changeSection('Home')">
-            <img src="main-logo.svg" alt="ico" class="object-contain w-16 my-3"/>
-            <div class="flex text-white text-center items-center justify-center text-2xl font-semibold">
-              Playlist Insights
-            </div>
-          </div>
-        </div> -->
-        <div class="flex flex-col w-full h-[100vh] justify-center items-center">
+        <!-- Scrollspy -->
+        <nav
+          *ngIf="sections"
+          class="fixed top-1/2 -translate-y-1/2 left-4 flex flex-col space-y-2 z-50 bg-neutral-800 p-2 rounded-2xl shadow-lg"
+        >
+          <button
+            *ngFor="let section of sections"
+            (click)="scrollToSection(section.ref)"
+            [ngClass]="{
+              'bg-neutral-700 shadow-md': currentSection === section.id,
+              'bg-neutral-800': currentSection !== section.id
+            }"
+            class="h-7 px-4 rounded-full text-xs font-medium text-left ring-1 ring-neutral-700 text-white transition-all duration-300"
+            [title]="section.label"
+          >
+            {{ section.label }}
+          </button>
+        </nav>
+        <div
+          #section1
+          class="flex flex-col w-full h-[100vh] justify-center items-center"
+          (wheel)="onWheel($event, null, section2)"
+        >
           <p
             class="flex flex-col text-white font-bold text-6xl w-1/2 text-center"
           >
@@ -32,34 +46,59 @@
             This website can do it for you!
           </p>
           <div class="flex mt-10 space-x-5">
-            <button class="flex items center content-center rounded-full px-5 py-4 bg-white font-medium text-sm
-            hover:ring-4
-            hover:ring-purple-600" (click)="goToInsights('deezer')">
-              <img src="deezer-logo-white.png" class="h-5 pr-2" alt="logo">
+            <button
+              class="flex items center content-center rounded-full px-5 py-4 bg-white font-medium text-sm hover:ring-4 hover:ring-purple-600 hover:shadow-2xl"
+              (click)="goToInsights('deezer')"
+            >
+              <img src="deezer-logo-white.png" class="h-5 pr-2" alt="logo" />
               Deezer Playlists
             </button>
-            <button class="flex items-center content-center rounded-full px-5 py-4 bg-white font-medium text-sm
-            hover:ring-4
-            hover:ring-green-600" (click)="goToInsights('spotify')">
-              <img src="spotify-black-favicon.ico" class="h-5 pr-2" alt="logo">
+            <button
+              class="flex items-center content-center rounded-full px-5 py-4 bg-white font-medium text-sm hover:ring-4 hover:ring-green-600 hover:shadow-2xl"
+              (click)="goToInsights('spotify')"
+            >
+              <img
+                src="spotify-black-favicon.ico"
+                class="h-5 pr-2"
+                alt="logo"
+              />
               Spotify Playlists
             </button>
-            <button class="flex items-center content-center rounded-full px-5 py-4 bg-white font-medium text-sm
-            hover:ring-4
-            hover:ring-[#fa586a]" (click)="goToInsights('appleMusic')">
-              <img src="apple-logo.svg" class="h-5 pr-2 mb-[2px]" alt="logo">
-              Apple Music Playlists
-            </button><button class="flex items-center content-center rounded-full px-5 py-4 bg-white font-medium text-sm
-            hover:ring-4
-            hover:ring-[#f50]" (click)="goToInsights('soundcloud')">
-              <img src="soundcloud-logo.png" class="h-5 pr-2 mb-[2px]" alt="logo">
+            <button
+              class="flex items-center content-center rounded-full px-5 py-4 bg-white font-medium text-sm hover:ring-4 hover:ring-[#fa586a] hover:shadow-2xl"
+              (click)="goToInsights('appleMusic')"
+            >
+              <img src="apple-logo.svg" class="h-5 pr-2 mb-[2px]" alt="logo" />
+              Apple Music Playlists</button
+            ><button
+              class="flex items-center content-center rounded-full px-5 py-4 bg-white font-medium text-sm hover:ring-4 hover:ring-[#f50] hover:shadow-2xl"
+              (click)="goToInsights('soundcloud')"
+            >
+              <img
+                src="soundcloud-logo.png"
+                class="h-5 pr-2 mb-[2px]"
+                alt="logo"
+              />
               Soundcloud Playlists
             </button>
           </div>
         </div>
-        <!-- <div class="flex flex-col w-full h-[93vh] justify-center items-center">
-          test
-        </div> -->
+        <div
+          #section2
+          class="flex flex-col w-full h-[100vh] justify-center items-center"
+          (wheel)="onWheel($event, section1, section3)"
+        >
+          <div class="flex bg-neutral-800 w-5/6 h-5/6 rounded-2xl shadow-xl items-center justify-center">
+            test
+          </div>
+        </div>
+        <div
+          #section3
+          class="flex flex-col w-full h-[100vh] justify-center items-center"
+          (wheel)="onWheel($event, section2, null)"
+        >
+          test 2
+        </div>
         <!-- <div>
           test
         </div> -->
